@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estadística · 2.º Parcial — Mis apuntes</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2712%27 fill=%27%231f4d49%27/%3E%3Ctext x=%2732%27 y=%2745%27 font-family=%27Georgia,serif%27 font-size=%2740%27 font-weight=%27700%27 fill=%27%23f4f0e6%27 text-anchor=%27middle%27%3E%CE%A3%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<style>
+  :root{
+    --paper:#f4f0e6;--paper-2:#ece6d8;--ink:#1c2a27;--ink-soft:#4a5a56;--line:#cdc4b0;
+    --u1:#8a6a1c;--u2:#a63d2f;--u3:#1f4d49;--u4:#8a6a1c;--u5:#a63d2f;--u6:#1f4d49;--green:#1f4d49;--gold:#c9a44a;--red:#a63d2f;
+    --ok:#1f4d49;--ok-soft:#dfe8e2;--no:#a63d2f;--no-soft:#f3dcd6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:"Atkinson Hyperlegible","Segoe UI",Verdana,sans-serif;font-size:17px;line-height:1.58;-webkit-font-smoothing:antialiased;position:relative}
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    mix-blend-mode:multiply;opacity:.6}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 28px;position:relative;z-index:1}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(244,240,230,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-inner{max-width:1100px;margin:0 auto;padding:12px 28px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .nav-brand{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-right:auto;font-weight:700}
+  .chip{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;text-decoration:none;color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;padding:5px 12px;transition:all .18s ease;background:transparent}
+  .chip:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+
+  header.hero{padding:80px 0 50px;border-bottom:3px solid var(--ink)}
+  .eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--u3);font-weight:700}
+  h1{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(52px,9vw,118px);line-height:.92;letter-spacing:-.02em;margin:14px 0 0}
+  h1 em{font-style:italic;font-weight:500;color:var(--u3)}
+  .hero-meta{display:flex;gap:36px;flex-wrap:wrap;margin-top:34px;font-family:"JetBrains Mono",monospace;font-size:13px}
+  .hero-meta b{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:4px}
+  .hero-meta span{font-size:20px;font-family:"Fraunces",serif;font-weight:600;color:var(--ink)}
+  .hero-lead{max-width:720px;margin-top:30px;font-size:20px;color:var(--ink-soft);line-height:1.5}
+  .hero-lead b{color:var(--ink);font-weight:700}
+
+  section.unit{padding:60px 0;border-bottom:1px solid var(--line)}
+  .unit-head{display:flex;align-items:baseline;gap:20px;margin-bottom:14px}
+  .unit-num{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(60px,11vw,130px);line-height:.8;color:var(--accent);opacity:.9;letter-spacing:-.04em}
+  .unit-titles .u-kicker{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .unit-titles h2{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(28px,4.5vw,48px);line-height:1.02;letter-spacing:-.01em;margin-top:6px}
+  .unit-weight{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--accent);border-radius:999px;padding:4px 11px;display:inline-block;margin-bottom:26px}
+
+  .card{background:var(--paper-2);border:1.5px solid var(--line);border-radius:14px;padding:24px 28px;margin-bottom:18px;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent)}
+  .h-main{font-family:"Fraunces",serif;font-weight:600;font-size:23px;margin-bottom:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .h-main .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);flex:none}
+  .h-main .tag{margin-left:auto;font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);border:1.5px solid var(--accent);border-radius:999px;padding:3px 9px}
+  .h-sub{font-family:"Fraunces",serif;font-weight:600;font-size:18px;color:var(--accent);margin:20px 0 6px;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:4px}
+  .def{margin-bottom:4px}
+  .def b{font-weight:700}
+  p.linea{margin:4px 0}
+  .formula{font-family:"JetBrains Mono",monospace;font-weight:700;background:var(--paper);border:1.5px solid var(--line);border-radius:9px;padding:2px 8px;font-size:.9em;white-space:nowrap}
+  .fbox{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:18px;text-align:center;background:var(--accent);color:#fff;border-radius:11px;padding:14px;margin:14px 0}
+  .fbox small{display:block;font-family:"Atkinson Hyperlegible",sans-serif;font-weight:400;font-size:13px;opacity:.92;margin-top:5px}
+  .fbox .sep{display:block;height:1px;background:rgba(255,255,255,.28);margin:10px 0}
+  .xbar{text-decoration:overline;text-decoration-thickness:2px;text-underline-offset:2px}
+  .katex{font-size:1.06em}
+  .katex-display{margin:8px 0;overflow-x:auto;overflow-y:hidden;padding:2px 0}
+  .fbox .katex{font-size:1.32em;font-weight:400}
+  .fbox .katex-display{margin:4px 0}
+  .fcard .katex{font-size:1.02em}
+  .fcard .katex-display{margin:6px 0;text-align:left}
+  .fcard .katex-display>.katex{text-align:left}
+  .ej-body .katex-display{margin:10px 0}
+  .ej-body .katex{font-size:1.1em}
+  .opt .katex,.esc-ok .katex{font-size:1.05em}
+
+  ul{list-style:none;margin-top:6px}
+  ul li{padding:5px 0 5px 24px;position:relative}
+  ul li::before{content:"–";position:absolute;left:4px;color:var(--accent);font-weight:700}
+  ul li b{font-weight:700}
+  ul.sub{margin:2px 0 2px 24px}
+  ul.sub li{font-size:15.5px;color:var(--ink-soft)}
+
+  ol{list-style:none;counter-reset:s;margin-top:6px}
+  ol li{counter-increment:s;padding:5px 0 5px 36px;position:relative}
+  ol li::before{content:counter(s);position:absolute;left:0;top:6px;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:12px;background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+  ol.pasos li{padding-left:0}
+  ol.pasos li::before{display:none}
+  ol.pasos li b{color:var(--accent)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+  @media(max-width:720px){.grid2,.grid3{grid-template-columns:1fr}.unit-head{flex-direction:column;gap:6px}.wrap{padding:0 18px}.nav-inner,.nav-chips{padding-left:18px;padding-right:18px}.fbox{font-size:12.5px;padding:12px 8px;letter-spacing:-.01em}.fbox .katex{font-size:1.02em}.card{padding:20px 18px}.fgrid{grid-template-columns:1fr}.tbl-scroll table.eco{min-width:540px}.tbl-scroll table.graf{min-width:0;font-size:13.5px}table.graf .dat{display:none}table.graf td{padding:8px 6px}table.graf td img{width:118px;max-width:none}table.graf td.soft,table.graf .soft{font-size:12px}table.graf .mtag{display:block;font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:3px}}
+
+  .mini{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px 18px}
+  .mini b{font-family:"Fraunces",serif;font-weight:600;color:var(--accent)}
+  .mini ul{margin-top:4px}
+  .mini ul li{padding:3px 0 3px 20px;font-size:15.5px}
+  .mini.danger{border-color:var(--no);background:var(--no-soft)}
+  .mini.danger b,.mini.danger ul li::before{color:var(--no)}
+  .mini.okk{border-color:var(--ok);background:var(--ok-soft)}
+  .mini.okk b,.mini.okk ul li::before{color:var(--ok)}
+
+  table.eco{width:100%;border-collapse:collapse;font-size:15px;margin-top:10px}
+  table.eco th{background:var(--accent);color:#fff;padding:8px 10px;text-align:left;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+  table.eco td{padding:7px 10px;border-bottom:1px solid var(--line);background:#fff;vertical-align:top}
+  table.eco tr:nth-child(even) td{background:var(--paper)}
+  table.eco td b{font-weight:700}
+  table.eco th.raw{text-transform:none;font-size:12px}
+  table.graf td{vertical-align:middle}
+  table.graf tr:nth-child(even) td{background:#fff}
+  table.graf td img{width:170px;max-width:42vw;height:auto;display:block;border:1px solid var(--line);border-radius:6px;background:#fff}
+  table.graf td.soft,table.graf .soft{color:var(--ink-soft);font-size:13.5px}
+  .src{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--ink-soft);margin-top:8px;letter-spacing:.03em}
+  .mtag{display:none}
+  .tbl-scroll{overflow-x:auto}
+  table.num td,table.num th{text-align:center}
+  table.num td:first-child{text-align:left}
+  table.num .hl td{background:var(--gold-soft,#f1e6c6)!important;font-weight:700}
+  .mono{font-family:"JetBrains Mono",monospace;font-size:.92em}
+
+  .note{background:#fff;border-left:4px solid var(--accent);border-radius:0 10px 10px 0;padding:12px 16px;font-size:15px;color:var(--ink-soft);margin-top:12px}
+  .note b{color:var(--ink)}
+  .star{background:#fff;border:2px solid var(--gold);border-radius:12px;padding:14px 18px;margin-top:14px}
+  .star .lbl{font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--u1);display:block;margin-bottom:5px}
+
+  details.ej{margin-top:14px;border:1.5px dashed var(--line);border-radius:12px;background:#fff}
+  details.ej summary{cursor:pointer;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--accent);padding:12px 16px;list-style:none;user-select:none}
+  details.ej summary::-webkit-details-marker{display:none}
+  details.ej summary::before{content:"▸  "}
+  details.ej[open] summary::before{content:"▾  "}
+  details.ej .ej-body{padding:0 18px 16px;font-size:15.5px}
+  details.ej .ej-body p{margin:6px 0}
+
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px;margin-top:10px}
+  .fcard{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:14px 16px}
+  .fcard .lbl{font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:6px}
+  .fcard .f{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:13px;color:var(--ink);line-height:1.7}
+  .fcard .d{font-size:14px;color:var(--ink-soft);margin-top:6px}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  footer{padding:60px 0 90px;text-align:center}
+  footer p{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft)}
+  footer .big{font-family:"Fraunces",serif;font-style:italic;font-weight:500;font-size:28px;text-transform:none;letter-spacing:0;color:var(--ink);margin-bottom:14px}
+
+  .modes{display:flex;gap:4px;background:var(--paper-2);border:1.5px solid var(--line);border-radius:999px;padding:4px;margin-left:auto}
+  .modes button{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);background:transparent;border:0;cursor:pointer;padding:6px 14px;border-radius:999px;transition:.16s}
+  .modes button:hover{color:var(--ink)}
+  .modes button.active{background:var(--ink);color:var(--paper)}
+  .nav-chips{max-width:1100px;margin:0 auto;padding:0 28px 12px;display:flex;gap:8px;flex-wrap:wrap}
+  .hidden{display:none!important}
+  .modeview{padding-bottom:40px}
+
+  .qwrap{max-width:760px;margin:46px auto 0}
+  .qtop{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:20px;font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--ink-soft);letter-spacing:.04em}
+  .qtop b{color:var(--u3)}
+  .qcard{background:var(--paper-2);border:1.5px solid var(--line);border-radius:16px;padding:28px;position:relative;overflow:hidden}
+  .qcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent,var(--u3))}
+  .qcard .qgroup{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent,var(--u3));font-weight:700}
+  .qcard .qq{font-family:"Fraunces",serif;font-weight:600;font-size:24px;line-height:1.22;margin:10px 0 22px}
+  .opt{display:block;width:100%;text-align:left;cursor:pointer;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:11px;padding:14px 16px;margin-bottom:10px;font-size:16px;font-family:"Atkinson Hyperlegible",sans-serif;line-height:1.4;transition:.14s}
+  .opt:hover:not(:disabled){border-color:var(--ink)}
+  .opt:disabled{cursor:default}
+  .opt.correct{border-color:var(--ok);background:var(--ok-soft)}
+  .opt.wrong{border-color:var(--no);background:var(--no-soft)}
+  .opt .mk{float:right;font-family:"JetBrains Mono",monospace;font-weight:700;margin-left:10px}
+  .qactions{margin-top:6px;display:flex;justify-content:flex-end;gap:10px}
+  .btn{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;background:var(--ink);color:var(--paper);border:0;padding:11px 20px;border-radius:10px;transition:.15s}
+  .btn:hover{filter:brightness(1.25)}
+  .btn.ghost{background:transparent;color:var(--ink-soft);box-shadow:inset 0 0 0 1.5px var(--line)}
+  .btn.ghost:hover{color:var(--ink)}
+  .fb{font-family:"JetBrains Mono",monospace;font-size:13px;margin:14px 0 2px;min-height:18px}
+  .fb.ok{color:var(--ok)}.fb.no{color:var(--no)}
+  .esc-input{width:100%;min-height:130px;resize:vertical;background:var(--paper);border:1.5px solid var(--line);border-radius:12px;color:var(--ink);font-family:"Atkinson Hyperlegible",sans-serif;font-size:17px;line-height:1.55;padding:14px 16px;margin-bottom:14px}
+  .esc-input:focus{outline:none;border-color:var(--accent,var(--u3))}
+  .esc-input:disabled{opacity:.65}
+  .esc-answer{margin-top:18px;border-top:1px solid var(--line);padding-top:16px}
+  .esc-lbl{font-family:"JetBrains Mono",monospace;font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-soft);display:block;margin-bottom:6px;font-weight:700}
+  .esc-yours p{font-size:16px;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 14px;white-space:pre-wrap;margin:0}
+  .esc-ok{border-left:4px solid var(--ok);padding-left:14px;margin-top:16px}
+  .esc-ok .ans{font-size:17px;margin:0}
+  .esc-rate{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--ink-soft);display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .esc-rate .rate{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:700;cursor:pointer;background:var(--paper-2);border:1.5px solid var(--line);color:var(--ink);padding:8px 14px;border-radius:8px;transition:.14s}
+  .esc-rate .rate:hover{border-color:var(--accent,var(--u3));color:var(--accent,var(--u3))}
+
+  @media print{
+    nav,footer .big{display:none}
+    body::before{display:none}
+    .reveal{opacity:1;transform:none}
+    section.unit{padding:24px 0;break-inside:auto}
+    .card{break-inside:avoid;background:#fff}
+    #view-quiz,#view-escribir{display:none!important}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-brand">Estadística · 2.º Parcial</span>
+    <div class="modes" id="modes">
+      <button data-mode="resumen" class="active">Resumen</button>
+      <button data-mode="quiz">Quiz</button>
+      <button data-mode="escribir">Escribir</button>
+    </div>
+  </div>
+  <div class="nav-chips" id="navchips">
+    <a class="chip" href="#u4">U4 · Dispersión</a><a class="chip" href="#u5">U5 · Correlación y regresión</a><a class="chip" href="#u6">U6 · Series de tiempo</a><a class="chip" href="#formulero">Formulero</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Mis apuntes · 2.º Parcial</p>
+    <h1>Estadística<br><em>2.º Parcial</em></h1>
+    <p class="hero-lead">Lo que dio el profesor en clase y lo que pide el modelo de la cátedra: <b>U4</b> dispersión y asimetría, <b>U5</b> correlación y regresión lineal, <b>U6</b> series de tiempo. Este parcial <b>sí pide calcular</b>: completar tablas auxiliares, calcular, interpretar con unidades y justificar.</p>
+    <div class="hero-meta">
+      <div><b>Unidades</b><span>4 · 5 · 6</span></div>
+      <div><b>Fecha</b><span>Lunes 16/11</span></div>
+      <div><b>Reglas</b><span>Varianza con N · 2 decimales · calculadora</span></div>
+    </div>
+  </header>
+
+  <div id="view-resumen">
+
+  <!-- ===================== U4 ===================== -->
+  <section class="unit reveal" id="u4" style="--accent:var(--u4)">
+    <div class="unit-head"><div class="unit-num">04</div>
+      <div class="unit-titles"><p class="u-kicker">Unidad 4</p><h2>Medidas de dispersión y asimetría</h2></div></div>
+    <span class="unit-weight">DM · varianza · desvío · CV · asimetría</span>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>Idea central</p>
+      <p class="def">Las medidas de dispersión dicen <b>qué tan dispersos o concentrados</b> están los datos <b>con respecto a la media aritmética</b> \( \bar{x} \). Casi todas necesitan la media: si no te la dan, la calculás primero.</p>
+      <p class="def">Medir la variabilidad = obtener un número que diga <b>cuán homogéneos</b> son los datos entre sí.</p>
+      <div class="grid2">
+        <div class="mini"><b>Absolutas</b> (en la unidad de la variable)<br>Rango · Rango intercuartílico · Desvío medio · Varianza · Desvío estándar.</div>
+        <div class="mini"><b>Relativa</b> (en %, la única)<br><b>Coeficiente de variación.</b> Es la que se usa <b>"por excelencia"</b>: permite <b>comparar</b> poblaciones distintas.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>Términos clave <span class="tag">columnas de la tabla auxiliar</span></p>
+      <div class="tbl-scroll">
+      <table class="eco">
+        <thead><tr><th>Símbolo</th><th>Qué es</th></tr></thead>
+        <tbody>
+          <tr><td class="mono"><b>N (o n)</b></td><td>Cantidad de datos. <b>En esta materia la varianza se divide por N</b> (no por n − 1).</td></tr>
+          <tr><td class="mono"><b>xi</b></td><td>El valor (datos sin agrupar o DAS) o la <b>marca de clase</b> (DAIC).</td></tr>
+          <tr><td class="mono"><b>fi</b></td><td>Frecuencia absoluta. Si los datos no están agrupados, <b>fi no aparece</b> en la fórmula.</td></tr>
+          <tr><td class="mono"><b>fi·xi</b></td><td>Columna para calcular o comprobar la media: \( \bar{x} = \sum f_i x_i / N \).</td></tr>
+          <tr><td class="mono"><b>d = xi − x̄</b></td><td><b>Desvío</b> de cada valor respecto de la media. Negativo = por debajo de la media; positivo = por encima.</td></tr>
+          <tr><td class="mono"><b>fi·|d|</b></td><td>Desvío en <b>valor absoluto</b> por su frecuencia → su suma va al desvío medio.</td></tr>
+          <tr><td class="mono"><b>fi·d²</b></td><td>Desvío <b>al cuadrado</b> por su frecuencia → su suma va a la varianza. Nunca da negativo.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="note"><b>Propiedad de la media:</b> \( \sum (x_i - \bar{x}) \cdot f_i = 0 \) (o casi 0 por redondeo). Por eso los desvíos no se pueden promediar tal cual: se usa el valor absoluto (DM) o el cuadrado (varianza). Si la suma da muy lejos de 0, la media está mal.</div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>1 · Rango &nbsp;R</p>
+      <div class="fbox">\[ R = x_{\max} - x_{\min} \]<small>Distancia entre los valores extremos</small></div>
+      <div class="grid2">
+        <div class="mini okk"><b>Ventajas</b><ul><li>Fácil de calcular y entender.</li><li>Da una idea rápida de la dispersión.</li></ul></div>
+        <div class="mini danger"><b>Desventajas</b><ul><li>Usa solo dos valores.</li><li>Muy sensible a los extremos.</li><li>No dice cómo se distribuyen los datos dentro del rango.</li></ul></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>2 · Rango intercuartílico &nbsp;RQ</p>
+      <div class="fbox">\[ RQ = Q_3 - Q_1 \]<small>Amplitud donde cae el 50 % central de los datos</small></div>
+      <p class="def">Fuera de Q1 queda el 25 % más bajo y fuera de Q3 el 25 % más alto: entre los dos queda el <b>50 % central</b>.</p>
+      <div class="note"><b>Frase modelo:</b> "El 50 % de los datos centrales cae entre Q1 y Q3; la amplitud de ese intervalo es RQ [unidades]."</div>
+      <div class="grid2" style="margin-top:12px">
+        <div class="mini okk"><b>Ventajas</b><ul><li>Mejor que el rango: no le afectan los extremos.</li><li>Muestra dónde se concentran los datos.</li></ul></div>
+        <div class="mini danger"><b>Desventajas</b><ul><li>No usa todos los datos (descarta la mitad).</li></ul></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>3 · Desvío medio &nbsp;DM</p>
+      <p class="def"><b>Promedio de los desvíos en valor absoluto</b> respecto de la media.</p>
+      <div class="fbox">\[ \text{Sin agrupar:}\quad DM = \frac{\sum |x_i - \bar{x}|}{N} \]
+        <span class="sep"></span>\[ \text{Agrupados:}\quad DM = \frac{\sum |x_i - \bar{x}| \cdot f_i}{N} \]
+        <small>Misma unidad que la variable</small></div>
+      <div class="note"><b>Frase modelo:</b> "En promedio, los precios se alejan 2,02 pesos de su media (hacia arriba o hacia abajo)."</div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>4 · Varianza &nbsp;S²</p>
+      <p class="def"><b>Promedio de los desvíos al cuadrado.</b></p>
+      <div class="fbox">\[ \text{Sin agrupar:}\quad S^2 = \frac{\sum (x_i - \bar{x})^2}{N} \]
+        <span class="sep"></span>\[ \text{Agrupados:}\quad S^2 = \frac{\sum (x_i - \bar{x})^2 \cdot f_i}{N} \]
+        <small>Se divide por N: el profesor corrigió la filmina que decía n − 1</small></div>
+      <ul>
+        <li>Unidad <b>cuadrática</b> (min², pesos², barbijos²): por eso no se interpreta en el problema.</li>
+        <li><b>Para qué sirve:</b> para llegar al desvío estándar. Ventaja: intervienen todos los datos. Desventaja: pierde la unidad original.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>5 · Desvío estándar (o típico) &nbsp;S · DE</p>
+      <div class="fbox">\[ S = \sqrt{S^2} \]<small>Vuelve a la unidad de la variable · calculás una y obtenés la otra</small></div>
+      <ul>
+        <li>Es la medida de dispersión absoluta más difundida. Ventajas: usa todos los datos y está en la misma unidad que la variable.</li>
+        <li><b>Control:</b> si S² = 51, S tiene que estar entre 7 y 8 (porque 7² = 49 y 8² = 64).</li>
+      </ul>
+      <div class="note"><b>Frase modelo:</b> "Los precios tienen una dispersión absoluta de 2,54 pesos respecto de su media."</div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>6 · Coeficiente de variación &nbsp;CV <span class="tag">por excelencia</span></p>
+      <p class="def">Relaciona el desvío estándar con la media. Es la <b>única medida de dispersión relativa</b>: se expresa en <b>%</b> y no tiene unidad, por eso sirve para comparar variables con medias o unidades distintas.</p>
+      <div class="fbox">\[ CV = \frac{S}{\bar{x}} \cdot 100 \]<small>Cuanto más lejos de 0 %, mayor variabilidad</small></div>
+      <div class="tbl-scroll">
+      <table class="eco">
+        <thead><tr><th>CV</th><th>Lectura</th></tr></thead>
+        <tbody>
+          <tr><td class="mono"><b>CV ≤ 10 %</b></td><td>Dispersión <b>baja</b>: los datos están cerca de su media, la distribución es <b>homogénea</b> y la <b>media es representativa</b>.</td></tr>
+          <tr><td class="mono"><b>CV &gt; 10 %</b></td><td>Dispersión <b>considerable / alta</b>: la distribución deja de ser homogénea y la <b>media no es representativa</b>.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="note"><b>Frase modelo:</b> "La distribución de barbijos tiene una dispersión absoluta de 7,14 barbijos y una dispersión relativa del 23,96 %; como supera el 10 %, la variabilidad es alta y la media no es representativa."</div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>7 · Comparar dos distribuciones</p>
+      <div class="tbl-scroll">
+      <table class="eco">
+        <thead><tr><th>Pregunta</th><th>Qué medida mirar</th></tr></thead>
+        <tbody>
+          <tr><td>¿Cuál tiene mayor dispersión <b>absoluta</b>?</td><td>La de mayor <b>S</b> (o DM).</td></tr>
+          <tr><td>¿Cuál tiene mayor dispersión <b>relativa</b>?</td><td>La de mayor <b>CV</b>.</td></tr>
+          <tr><td>¿Cuál es <b>más homogénea</b> (relativamente)?</td><td>La de <b>menor CV</b>.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="star"><span class="lbl">La trampa del parcial</span>Una distribución puede tener <b>mayor S</b> y, a la vez, <b>menor CV</b> (si su media es mucho más grande). Mayor S <b>no implica</b> menos homogénea: la homogeneidad se decide con el CV.</div>
+      <div class="note"><b>Cuándo alcanza con S:</b> si las medias son iguales (o casi), las medidas absolutas alcanzan para comparar. Con medias o unidades distintas, hace falta el CV.</div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>8 · Asimetría <span class="tag">forma de la distribución</span></p>
+      <p class="def">Mide el <b>grado de simetría</b> de la distribución respecto de la media. Cuanto más asimétrica, más se separan media, mediana y moda; la <b>media</b> es la que más se desplaza <b>hacia la cola</b> (la arrastran los extremos).</p>
+      <div class="tbl-scroll">
+      <table class="eco">
+        <thead><tr><th>Tipo</th><th>Orden de las medidas</th><th>Forma</th></tr></thead>
+        <tbody>
+          <tr><td><b>Simétrica</b></td><td class="mono">x̄ = Me = Mo</td><td>Cada mitad es espejo de la otra.</td></tr>
+          <tr><td><b>Asimétrica positiva</b> (a la derecha)</td><td class="mono">Mo &lt; Me &lt; x̄</td><td>Frecuencias altas a la izquierda, <b>cola a la derecha</b>.</td></tr>
+          <tr><td><b>Asimétrica negativa</b> (a la izquierda)</td><td class="mono">x̄ &lt; Me &lt; Mo</td><td>Frecuencias altas a la derecha, <b>cola a la izquierda</b>.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="h-sub">Asimetría absoluta y relativa (las del modelo de parcial)</p>
+      <div class="fbox">\[ A_a = \bar{x} - Mo \]
+        <span class="sep"></span>\[ A_r = \frac{A_a}{S} = \frac{\bar{x} - Mo}{S} \]
+        <small>Ar es el coeficiente de asimetría de Pearson: la diferencia medida en cantidad de desvíos estándar</small></div>
+      <ul>
+        <li><b>Signo:</b> ≈ 0 → simétrica · <b>&gt; 0 → asimetría positiva</b> (a la derecha) · <b>&lt; 0 → asimetría negativa</b> (a la izquierda).</li>
+        <li><b>Aa</b> está en la unidad de la variable: cuanto mayor su valor absoluto, mayor asimetría. <b>Ar</b> no tiene unidad: sirve para <b>comparar la asimetría</b> de dos distribuciones de distinta escala.</li>
+        <li>Si no se puede calcular la moda (o es bimodal): \( A_{s2} = \frac{3 \cdot (\bar{x} - Me)}{S} \).</li>
+        <li>En una distribución asimétrica, la medida de posición más representativa es la <b>mediana</b> (no la afectan los extremos).</li>
+      </ul>
+      <div class="note"><b>Frase modelo:</b> "Ar = 0,40: asimetría positiva (a la derecha); coincide con moda &lt; mediana &lt; media: la cola está hacia los valores altos, que arrastran la media."</div>
+      <details class="ej"><summary>Del apunte, fuera del modelo: Fisher y curtosis</summary><div class="ej-body">
+        <p><b>Coeficiente de Fisher:</b> \( A_F = \frac{\sum (x_i - \bar{x})^3 \cdot f_i}{N \cdot S^3} \). Mismo criterio de signo (0 simétrica, + positiva, − negativa).</p>
+        <p><b>Curtosis:</b> \( C_F = \frac{\sum (x_i - \bar{x})^4 \cdot f_i}{N \cdot S^4} - 3 \). Mide el apuntamiento comparado con la normal: = 0 mesocúrtica · &gt; 0 leptocúrtica (más apuntada) · &lt; 0 platicúrtica (más achatada).</p>
+      </div></details>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>Procedimiento: completar la tabla auxiliar</p>
+      <ol class="pasos">
+        <li><b>Paso 1)</b> Columna <b>fi·xi</b> y su suma → \( \bar{x} = \sum f_i x_i / N \). Si te dan la media, <b>comprobala</b> con la tabla.</li>
+        <li><b>Paso 2)</b> Columna <b>d = xi − x̄</b> (con signo). Usar la <b>marca de clase</b>, no la frecuencia (error típico).</li>
+        <li><b>Paso 3)</b> Columna <b>fi·|d|</b> → suma → \( DM = \sum f_i |d| / N \).</li>
+        <li><b>Paso 4)</b> Columna <b>fi·d²</b> (primero d², después por fi) → suma → \( S^2 = \sum f_i d^2 / N \).</li>
+        <li><b>Paso 5)</b> \( S = \sqrt{S^2} \) → \( CV = S / \bar{x} \cdot 100 \).</li>
+        <li><b>Paso 6)</b> \( A_a = \bar{x} - Mo \) → \( A_r = A_a / S \) → signo y relación con media, mediana y moda.</li>
+        <li><b>Paso 7)</b> Interpretar cada resultado <b>con su unidad</b>: DM y S en la unidad de la variable · S² en unidad² · CV en % · Ar sin unidad.</li>
+      </ol>
+      <div class="note"><b>Redondeo:</b> trabajar con todos los decimales y redondear el resultado final a <b>2 decimales</b> ("cuantos más dígitos usan, menos error").</div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>Cómo lo pregunta el parcial → qué calcular</p>
+      <div class="tbl-scroll">
+      <table class="eco">
+        <thead><tr><th>Consigna</th><th>Qué hacer</th></tr></thead>
+        <tbody>
+          <tr><td>"Completá las celdas y comprobá la media"</td><td>Tabla auxiliar pasos 1–4; \( \sum f_i x_i / N \) tiene que dar la media dada.</td></tr>
+          <tr><td>"Mostrá el cálculo de una celda de la última columna"</td><td>Escribir \( f_i \cdot d^2 \) con números, ej.: \( 3 \cdot (-4)^2 = 48 \).</td></tr>
+          <tr><td>"Calculá e interpretá DM, varianza, DE y CV, con unidades"</td><td>Cadena DM → S² → S → CV, una frase por medida.</td></tr>
+          <tr><td>"Interpretá el signo de la asimetría"</td><td>Signo de Aa/Ar + orden de media, mediana y moda + hacia dónde va la cola.</td></tr>
+          <tr><td>"¿Cuál tiene mayor dispersión absoluta / relativa?"</td><td>Absoluta → S · relativa → CV.</td></tr>
+          <tr><td>"¿Cuál es más homogénea?"</td><td>Menor CV.</td></tr>
+          <tr><td>"«Como B tiene mayor DE, es menos homogéneo» ¿es correcto?"</td><td>Calcular los dos CV: la homogeneidad relativa se decide con el CV, no con la DE.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>Ojo: errores del material de U4</p>
+      <ul>
+        <li>Filmina de varianza con \( n - 1 \): el profesor la corrigió en clase; se divide por <b>N</b> (el modelo de parcial también lo indica).</li>
+        <li>RQ de la filmina (turistas) usa Q3 = 110, que está mal (viene del error de U3). El correcto es Q3 = 155,83.</li>
+        <li>En clase dijo que "el cuartil 2 coincide con la media": coincide con la <b>mediana</b>.</li>
+        <li>"Rango semiintercuartílico" lo usó como sinónimo del RQ; en rigor el semiintercuartílico es \( (Q_3 - Q_1)/2 \).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== U5 ===================== -->
+  <section class="unit reveal" id="u5" style="--accent:var(--u5)">
+    <div class="unit-head"><div class="unit-num">05</div>
+      <div class="unit-titles"><p class="u-kicker">Unidad 5</p><h2>Datos bivariados: correlación y regresión lineal</h2></div></div>
+    <span class="unit-weight">Dispersión · recta MCO · r · R² · estimación</span>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>Relación entre dos variables cuantitativas</p>
+      <p class="def">Se estudia el comportamiento conjunto de dos variables medidas sobre las mismas unidades. Hay que considerar tres cosas:</p>
+      <ul>
+        <li><b>Existencia:</b> ¿hay relación?</li>
+        <li><b>Forma:</b> ¿cómo se da? (lineal o no; directa o inversa)</li>
+        <li><b>Intensidad (fuerza):</b> ¿qué tan fuerte es?</li>
+      </ul>
+      <div class="tbl-scroll">
+      <table class="eco">
+        <thead><tr><th>Variable</th><th>Nombres</th><th>Eje</th></tr></thead>
+        <tbody>
+          <tr><td class="mono"><b>X</b></td><td>Independiente · <b>explicativa</b></td><td>Horizontal</td></tr>
+          <tr><td class="mono"><b>Y</b></td><td>Dependiente · <b>explicada</b> · respuesta</td><td>Vertical</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="def" style="margin-top:10px">Si el enunciado no lo dice, se decide por sentido común (qué influye en qué). Que una variable aparezca primero en el enunciado <b>no es regla</b>. Decidir el sentido de la causalidad es ajeno a la Estadística: lo decide el investigador por su conocimiento del tema.</p>
+      <div class="grid2" style="margin-top:12px">
+        <div class="mini"><b>Análisis de regresión</b><br>Encontrar el <b>modelo matemático</b> (la recta) que describe la relación y permite <b>estimar Y a partir de X</b>. Supone una relación causal de X hacia Y.</div>
+        <div class="mini"><b>Análisis de correlación</b><br><b>Medir qué tan intensa</b> es la relación lineal (r). No supone causalidad: da igual cuál es X y cuál Y.</div>
+      </div>
+      <details class="ej"><summary>Naturaleza de la relación (filmina)</summary><div class="ej-body">
+        <p>Dependencia causal unilateral (una influye en la otra y no al revés) · interdependencia (se influyen mutuamente, ej.: precio y cantidad) · dependencia indirecta (las dos dependen de una tercera) · covariación casual (coinciden por azar).</p>
+      </div></details>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>1 · Diagrama de dispersión <span class="tag">"va a entrar en el parcial"</span></p>
+      <p class="def">Representación gráfica de los <b>pares ordenados (x; y)</b>. El análisis de correlación <b>siempre empieza por el diagrama</b>: mirándolo se anticipa existencia, forma e intensidad.</p>
+      <p class="h-sub">Cómo hacerlo a mano alzada</p>
+      <ol class="pasos">
+        <li><b>Paso 1)</b> X en el eje horizontal, Y en el vertical.</li>
+        <li><b>Paso 2)</b> Elegir una <b>escala con sentido</b> para cada eje (pasos iguales). Si los datos están lejos de 0 se puede cortar el eje y arrancar cerca del mínimo.</li>
+        <li><b>Paso 3)</b> <b>Rotular</b> cada eje con la variable y su unidad, y poner <b>título</b>: "[Y] en función de [X]". Sin rótulos el gráfico queda incompleto.</li>
+        <li><b>Paso 4)</b> Ubicar cada par como un punto. Los pares no se separan.</li>
+        <li><b>Paso 5)</b> Describir la nube: ¿hay relación? ¿lineal? ¿directa o inversa? ¿intensa (puntos pegados a una recta) o débil (puntos muy dispersos)?</li>
+      </ol>
+      <div class="tbl-scroll">
+      <table class="eco">
+        <thead><tr><th>Lo que se ve</th><th>Relación</th><th>Signo de b y r</th></tr></thead>
+        <tbody>
+          <tr><td>Los puntos suben de izquierda a derecha</td><td><b>Directa</b> (positiva)</td><td class="mono">b &gt; 0 · r &gt; 0</td></tr>
+          <tr><td>Los puntos bajan de izquierda a derecha</td><td><b>Inversa</b> (indirecta, negativa)</td><td class="mono">b &lt; 0 · r &lt; 0</td></tr>
+          <tr><td>Nube sin patrón</td><td><b>Nula</b> (no hay relación lineal)</td><td class="mono">b ≈ 0 · r ≈ 0</td></tr>
+          <tr><td>Todos los puntos sobre una recta</td><td><b>Perfecta</b></td><td class="mono">r = 1 o r = −1</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="star"><span class="lbl">Vocabulario del profesor</span>La <b>recta</b> es creciente o decreciente; la <b>relación</b> es <b>directa</b> o <b>inversa</b>. Directa = las dos variables se mueven en el <b>mismo sentido</b> (las dos suben o <b>las dos bajan</b>); inversa = cuando una sube, la otra baja.</div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>2 · Recta de regresión por mínimos cuadrados</p>
+      <p class="def">La recta que <b>mejor se ajusta</b> a la nube de puntos. Para cada \( x_i \) da un valor estimado \( \hat{y}_i \).</p>
+      <div class="fbox">\[ \hat{y} = a + b \cdot x \]<small>El "sombrerito" indica valor estimado (teórico) · a = ordenada al origen · b = pendiente</small></div>
+      <p class="def"><b>Error estimado:</b> \( e_i = y_i - \hat{y}_i \) (observado menos estimado). El <b>método de mínimos cuadrados</b> (o de Gauss) elige a y b de modo que la <b>suma de los errores al cuadrado sea mínima</b>.</p>
+      <p class="h-sub">Fórmulas</p>
+      <div class="fbox">\[ b = \frac{N \sum XY - \sum X \cdot \sum Y}{N \sum X^2 - \left( \sum X \right)^2} \]
+        <span class="sep"></span>\[ a = \bar{y} - b \cdot \bar{x} \]
+        <small>Con las sumatorias de la tabla X · Y · X² · Y² · XY (la que trae el parcial) · N = cantidad de pares</small></div>
+      <ul>
+        <li>Equivalentes del material: \( b = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2} \) (con desvíos) o \( b = r \cdot \frac{S_y}{S_x} \) (si tenés r y los desvíos).</li>
+        <li>La recta <b>siempre pasa por el punto</b> \( (\bar{x}; \bar{y}) \): de ahí sale \( a = \bar{y} - b \bar{x} \). Sin las medias no hay recta.</li>
+        <li><b>No redondear b antes de calcular a</b>: el error se multiplica por \( \bar{x} \).</li>
+        <li>El <b>signo de b</b> tiene que coincidir con lo que anticipaste en el diagrama.</li>
+      </ul>
+      <p class="h-sub">Cómo se interpretan a y b</p>
+      <div class="grid2">
+        <div class="mini"><b>b · pendiente</b><br>Cuánto <b>cambia en promedio Y (estimado)</b> cuando X <b>aumenta una unidad</b>. b &gt; 0 aumenta, b &lt; 0 disminuye. Con las unidades de las dos variables.</div>
+        <div class="mini"><b>a · ordenada al origen</b><br>Valor estimado promedio de Y <b>cuando X = 0</b>. Si X = 0 está <b>fuera del rango observado</b> (o da algo absurdo, como ventas negativas), no tiene interpretación práctica: decirlo.</div>
+      </div>
+      <div class="note"><b>Frase modelo:</b> "b = 59,48: por cada integrante más en el grupo, el gasto diario aumenta en promedio $59,48." · "a = 13,08: con 0 integrantes se estimaría un gasto de $13,08, pero X = 0 está fuera del rango observado (1 a 6 integrantes), así que no tiene sentido práctico."</div>
+      <p class="h-sub">Trazar la recta en el diagrama</p>
+      <p class="def">Alcanza con <b>dos puntos</b>: elegir dos valores de x (por ejemplo, el mínimo y el máximo observados), calcular su \( \hat{y} \) y unirlos. <b>Indicar los dos puntos usados.</b></p>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>3 · Coeficiente de correlación lineal de Pearson &nbsp;r</p>
+      <p class="def">Mide la <b>intensidad (fuerza) y el sentido</b> de la relación <b>lineal</b> entre X e Y. Cuantifica qué tan dispersos están los puntos alrededor de la recta.</p>
+      <div class="fbox">\[ r = \frac{N \sum XY - \sum X \sum Y}{\sqrt{\left[ N \sum X^2 - (\sum X)^2 \right] \cdot \left[ N \sum Y^2 - (\sum Y)^2 \right]}} \]
+        <small>Mismo numerador que b · el denominador es una raíz: nunca negativo · \( -1 \le r \le 1 \)</small></div>
+      <ul>
+        <li>Con desvíos ("fórmula de trabajo" del profesor): \( r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \cdot \sum (y_i - \bar{y})^2}} \).</li>
+        <li>Con calculadora: primero el numerador (su <b>signo</b> da el sentido), después cada corchete, multiplicar, <b>la raíz al final</b>. Ojo: \( (\sum X)^2 \) es la suma al cuadrado, no \( \sum X^2 \).</li>
+        <li><b>Si da más de 1 o menos de −1, está mal calculado.</b></li>
+        <li>El <b>signo</b> solo dice el sentido; la <b>intensidad</b> la da el valor absoluto. Una relación inversa con r = −0,99 es más intensa que una directa con r = 0,5.</li>
+      </ul>
+      <p class="h-sub">Escala de la cátedra (en valor absoluto)</p>
+      <div class="tbl-scroll">
+      <table class="eco">
+        <thead><tr><th>|r|</th><th>Correlación</th></tr></thead>
+        <tbody>
+          <tr><td>0 (o menor a 0,09)</td><td>Nula o inexistente (puede haber relación <b>no lineal</b>)</td></tr>
+          <tr><td>0,10 a 0,19</td><td>Muy débil</td></tr>
+          <tr><td>0,20 a 0,49</td><td>Débil</td></tr>
+          <tr><td>0,50 a 0,69</td><td>Moderada</td></tr>
+          <tr><td>0,70 a 0,84</td><td>Significativa</td></tr>
+          <tr><td>0,85 a 0,95</td><td>Fuerte</td></tr>
+          <tr><td>1 / −1</td><td>Perfecta positiva (directa) / perfecta negativa (inversa)</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="note"><b>Entre 0,95 y 1</b> la escala no le pone nombre: decí "fuerte, casi perfecta". <b>Frase modelo:</b> "r = 0,85: relación lineal directa y fuerte entre el número de integrantes del grupo y el gasto diario."</div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>4 · Coeficiente de determinación &nbsp;R²</p>
+      <div class="fbox">\[ R^2 = r^2 \cdot 100 \]<small>Entre 0 y 1, o entre 0 % y 100 % · se calcula cuando se puede suponer relación causal</small></div>
+      <p class="def">Mide qué tan cerca están los datos de la recta: es la <b>proporción de la variación de Y que está explicada por la variación de X</b> en la recta de regresión. Cuanto más alto, mejor el ajuste.</p>
+      <div class="note"><b>Frase modelo:</b> "R² = 72,25 %: el 72,25 % de la variación de los gastos diarios está explicada por la variación del número de integrantes del grupo; el 27,75 % restante se debe a otros factores que no estamos considerando."</div>
+      <div class="note"><b>Ojo:</b> si sacás r de R² (con la raíz), el <b>signo de r</b> lo da la pendiente b. Excel, en la línea de tendencia, muestra R², no r.</div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>5 · Estimación: interpolación y extrapolación</p>
+      <p class="def">Para estimar, se <b>reemplaza x</b> en la recta: \( \hat{y} = a + b \cdot x \). Se dice "<b>se estima</b>" porque es un valor teórico promedio. Cuando X es tiempo, se dice "pronosticar" (U6).</p>
+      <div class="grid2">
+        <div class="mini okk"><b>Interpolación</b><br>x está <b>dentro del rango observado</b> (entre el mínimo y el máximo de X). La estimación es confiable; tanto más cuanto menos dispersos estén los puntos (mayor |r|).</div>
+        <div class="mini danger"><b>Extrapolación</b><br>x está <b>fuera del rango observado</b>. Pierde precisión a medida que se aleja y puede dar errores graves: supone que la relación sigue igual. <b>Requiere precaución.</b></div>
+      </div>
+      <ul style="margin-top:10px">
+        <li><b>Pasar a la unidad de X antes de reemplazar:</b> si X está en millones, $4.500.000 → x = 4,5; si está en miles, $25.000 → x = 25.</li>
+        <li><b>Volver a la unidad de Y al responder:</b> si Y está en cientos de unidades, ŷ = 5,32 → 532 unidades.</li>
+        <li>Control: el resultado de una interpolación tiene que quedar entre los Y de los x vecinos.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>Procedimiento: tabla X · Y · X² · Y² · XY</p>
+      <ol class="pasos">
+        <li><b>Paso 1)</b> Completar celdas: \( X^2 = X \cdot X \), \( Y^2 = Y \cdot Y \), \( XY = X \cdot Y \). Si falta un X o un Y, despejarlo de una celda completa (ej.: si \( X^2 = 144 \), X = 12).</li>
+        <li><b>Paso 2)</b> Sumar cada columna: ΣX, ΣY, ΣX², ΣY², ΣXY. Si falta un dato y está la suma, se despeja restando.</li>
+        <li><b>Paso 3)</b> Medias: \( \bar{x} = \sum X / N \), \( \bar{y} = \sum Y / N \).</li>
+        <li><b>Paso 4)</b> b con sumatorias → a = ȳ − b·x̄ → escribir \( \hat{y} = a + bx \).</li>
+        <li><b>Paso 5)</b> r con sumatorias → R² = r²·100.</li>
+        <li><b>Paso 6)</b> Diagrama + recta con dos puntos + interpretación de a, b, r y R² con unidades.</li>
+        <li><b>Paso 7)</b> Estimaciones: convertir x, reemplazar, volver a la unidad de Y, decir si es interpolación o extrapolación.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>Cómo lo pregunta el parcial → qué hacer</p>
+      <div class="tbl-scroll">
+      <table class="eco">
+        <thead><tr><th>Consigna</th><th>Qué hacer</th></tr></thead>
+        <tbody>
+          <tr><td>"Representá en un diagrama y describí la asociación"</td><td>Diagrama rotulado + existencia, forma (lineal, directa/inversa) e intensidad aparente.</td></tr>
+          <tr><td>"Hallá la recta de ajuste de Y sobre X"</td><td>b y a por mínimos cuadrados; Y es la explicada.</td></tr>
+          <tr><td>"Indicá dos puntos utilizados para trazarla"</td><td>Dos pares (x; ŷ) calculados con la recta.</td></tr>
+          <tr><td>"Interpretá pendiente y ordenada con unidades. ¿X = 0 pertenece al rango?"</td><td>b = cambio de Y por unidad de X · a = Y estimado con X = 0 · comparar 0 con el mínimo y el máximo de X.</td></tr>
+          <tr><td>"Calculá r y R². Tipo de relación y % explicado"</td><td>r: signo + intensidad según la escala · R²: % de la variación de Y explicada por X.</td></tr>
+          <tr><td>"Estimá para … Distinguí interpolación y extrapolación"</td><td>Convertir unidades, reemplazar, decir cuál está dentro/fuera del rango y que la extrapolación requiere precaución.</td></tr>
+          <tr><td>"Otra relación tiene r = −0,9x: ¿con cuál hay mayor asociación?"</td><td>Comparar <b>valores absolutos</b>: el signo no cuenta para la intensidad.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>Ojo: errores y diferencias del material de U5</p>
+      <ul>
+        <li>Guía TP N°5, ej. 2: el segundo dato dice \( \sum x_{1,i} \cdot y_i = 43740 \); es \( \sum x_{2,i} \cdot y_i \) (precio × habitaciones).</li>
+        <li>El profesor llama "fórmula de trabajo" a la de desvíos y "original" a la de sumatorias con N (en los libros es al revés). Las dos dan lo mismo.</li>
+        <li>En una clase dijo "el 93 % del volumen de ventas está explicado"; la forma correcta es "el 93 % de la <b>variación</b> de las ventas".</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== U6 ===================== -->
+  <section class="unit reveal" id="u6" style="--accent:var(--u6)">
+    <div class="unit-head"><div class="unit-num">06</div>
+      <div class="unit-titles"><p class="u-kicker">Unidad 6</p><h2>Análisis de series de tiempo</h2></div></div>
+    <span class="unit-weight">Tendencia · relativos · pronóstico · estacionalidad</span>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>Serie de tiempo</p>
+      <p class="def">Conjunto de <b>observaciones tomadas en instantes específicos</b>, generalmente a <b>intervalos iguales</b> (años, trimestres, meses, días, horas).</p>
+      <p class="def">Matemáticamente: los valores \( Y_1, Y_2, \dots, Y_n \) de una variable Y (ventas, cotización…) en los tiempos \( t_1, t_2, \dots, t_n \). <b>Y es función de t:</b></p>
+      <div class="fbox">\[ Y = F(t) \]<small>En el eje horizontal va el tiempo; en el vertical, los valores de la serie</small></div>
+      <p class="def">Se representa con un <b>gráfico de líneas</b> (gráfico de evolución): los puntos de cada período unidos en orden.</p>
+      <p class="h-sub">Para qué sirve en Marketing y Dirección de Negocios</p>
+      <ul>
+        <li>Identificar <b>patrones de consumo, tendencias y estacionalidades</b> → adaptar la estrategia de marketing.</li>
+        <li>Hacer <b>pronósticos de ventas</b> → planificar la producción y las campañas promocionales.</li>
+        <li>Detectar <b>riesgos</b> (ciclos económicos, cambios estacionales) y tomar medidas preventivas.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>Componentes de una serie <span class="tag">modelo multiplicativo</span></p>
+      <p class="def">La serie observada es el <b>producto</b> de cuatro movimientos característicos (en este curso se usa el producto, no la suma):</p>
+      <div class="fbox">\[ Y = T \cdot E \cdot C \cdot A \]</div>
+      <div class="tbl-scroll">
+      <table class="eco">
+        <thead><tr><th>Componente</th><th>Qué es</th><th>Ejemplo</th></tr></thead>
+        <tbody>
+          <tr><td><b>T · Tendencia</b></td><td>Movimiento a <b>largo plazo</b> (secular): la <b>dirección general</b> de la serie. Se representa con una recta o curva de tendencia.</td><td>Crecimiento sostenido de las ventas</td></tr>
+          <tr><td><b>E · Estacionalidad</b></td><td>Esquemas <b>idénticos o casi idénticos</b> que se repiten en los <b>mismos períodos de años sucesivos</b>, por sucesos recurrentes anuales. También vale para semanas, días u horas.</td><td>Agua envasada en verano · regalos en el Día de la Madre · juguetes en Reyes</td></tr>
+          <tr><td><b>C · Ciclos</b></td><td><b>Oscilaciones alrededor de la tendencia</b>, de duración irregular (varios años). Ligados a la actividad económica general: prosperidad, recesión, depresión y recuperación.</td><td>Ciclo económico de expansión y contracción</td></tr>
+          <tr><td><b>A · Aleatoriedad</b></td><td>Movimientos <b>esporádicos</b> por sucesos de azar. Suelen ser de corta duración y no tienen patrón.</td><td>Sequías, inundaciones, huelgas, elecciones</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="note"><b>Ciclo económico:</b> prosperidad y depresión son los <b>extremos</b> (actividad en su punto más alto o más bajo); recesión y recuperación son las <b>transiciones</b> entre esos extremos.</div>
+      <p class="def" style="margin-top:12px"><b>Análisis de series de tiempo</b> = descomponer la serie: identificar y aislar los factores T, E, C y A para interpretar el pasado y pronosticar el futuro.</p>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>1 · Promedios móviles <span class="tag">suavización</span></p>
+      <p class="def">Un <b>promedio móvil de orden N</b> es la sucesión de medias aritméticas de N valores consecutivos: se suman N períodos, se divide por N y se avanza un período.</p>
+      <div class="fbox">\[ PM_3 = \frac{Y_1 + Y_2 + Y_3}{3} \;,\; \frac{Y_2 + Y_3 + Y_4}{3} \;,\; \dots \]<small>El numerador se llama total móvil · cada promedio se ubica en el período central de los N que promedia</small></div>
+      <ul>
+        <li><b>Para qué sirve:</b> como todo promedio, <b>reduce la variación</b>: elimina las fluctuaciones bruscas (suavización) y deja ver si la serie sube, baja o se mantiene.</li>
+        <li>Con orden 3, el primer y el último período <b>quedan sin promedio</b> (no tienen vecino de un lado).</li>
+        <li>Conviene un orden <b>impar</b> (3, 5, 7) para que el promedio caiga justo en un período y no haya que centrarlo.</li>
+        <li><b>Promedio móvil ponderado:</b> si se usan medias ponderadas con pesos fijados de antemano.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>2 · Tendencia por mínimos cuadrados <span class="tag">la que más entra</span></p>
+      <p class="def">Se ajusta una recta igual que en U5, pero la X es el <b>tiempo codificado t</b>. Se usan datos <b>anuales</b> (idealmente 15 o 20 años, para que un ciclo no se confunda con la tendencia).</p>
+      <div class="fbox">\[ T_t = a + b \cdot t \]<small>Mismas fórmulas de a y b que en regresión, con t en lugar de X (o la da Excel)</small></div>
+      <p class="h-sub">La variable tiempo t</p>
+      <ul>
+        <li>Se reemplazan los años por números naturales consecutivos para calcular más rápido.</li>
+        <li><b>Ojo con desde dónde arranca:</b> el apunte de la cátedra empieza en \( t = 0 \); los ejercicios con Excel suelen empezar en \( t = 1 \). <b>Siempre leerlo del enunciado.</b></li>
+        <li>Si \( t = 1 \) es el primer año, entonces <b>\( t = 0 \) es el año anterior</b> al primero observado.</li>
+        <li>Para pronosticar se sigue la numeración: el año siguiente al último observado es el último t + 1.</li>
+      </ul>
+      <p class="h-sub">Cómo se interpretan los parámetros</p>
+      <div class="grid2">
+        <div class="mini"><b>a · ordenada al origen</b><br>Valor de tendencia estimado para el período \( t = 0 \) (en las unidades de Y). Decir <b>a qué año corresponde t = 0</b>.</div>
+        <div class="mini"><b>b · pendiente</b><br>Cuánto <b>aumenta (b &gt; 0) o disminuye (b &lt; 0) en promedio</b> la tendencia de Y <b>por cada período</b> (por año, por trimestre).</div>
+      </div>
+      <div class="note"><b>Frase modelo:</b> "b = 12,5: según la tendencia, las ventas aumentan en promedio 12,5 millones de pesos por año." · "a = 48: valor de tendencia estimado para 2014 (t = 0, si t = 1 es 2015), 48 millones de pesos."</div>
+      <div class="note"><b>Ecuación de tendencia ≠ ecuación de regresión</b> (en sentido estricto): Y no es aleatoria sino una serie de valores históricos, hay un solo valor por período, y los períodos contiguos suelen ser dependientes.</div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>3 · Relativos cíclicos (datos anuales)</p>
+      <p class="def">Con datos <b>anuales</b> no hay estacionalidad, así que al dividir el dato observado por su valor de tendencia se <b>elimina el efecto de la tendencia</b> y queda la parte cíclica (con lo aleatorio): \( Y / T = C \cdot A \).</p>
+      <div class="fbox">\[ R_t = \frac{Y_t}{T_t} \cdot 100 \]<small>Yt = valor observado · Tt = valor de tendencia de ese mismo año</small></div>
+      <div class="tbl-scroll">
+      <table class="eco">
+        <thead><tr><th>Resultado</th><th>Cómo se lee</th></tr></thead>
+        <tbody>
+          <tr><td class="mono"><b>Rt &gt; 100</b></td><td>El valor observado está <b>por encima de la tendencia</b> (en Rt − 100 %).</td></tr>
+          <tr><td class="mono"><b>Rt = 100</b></td><td>El valor observado <b>coincide con la tendencia</b>. <b>No</b> significa que la variable no cambió respecto del año anterior.</td></tr>
+          <tr><td class="mono"><b>Rt &lt; 100</b></td><td>El valor observado está <b>por debajo de la tendencia</b> (en 100 − Rt %).</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="note"><b>Frase modelo:</b> "Un relativo de 93,40 indica que ese año las ventas estuvieron un 6,60 % por debajo de lo que indicaba la tendencia; uno de 104,20, un 4,20 % por encima."</div>
+      <ul>
+        <li>Los relativos se calculan <b>solo para los años observados</b>. En los años pronosticados no hay Yt, así que no corresponde calcular Rt.</li>
+        <li><b>Gráfico de relativos (gráfico de ciclos):</b> años en el eje horizontal, Rt en el vertical, línea unida y una <b>referencia horizontal en 100</b> (la tendencia). Arriba de 100 = por encima de la tendencia; abajo = por debajo; sobre la línea = coincide.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>4 · Pronóstico con la tendencia</p>
+      <p class="def">Se reemplaza en la recta el <b>t del período futuro</b>. Ese valor de tendencia es el pronóstico (con datos anuales).</p>
+      <div class="fbox">\[ \hat{Y}_{futuro} = T_{t} = a + b \cdot t_{futuro} \]<small>Ej.: si t = 1 es 2015 y el último observado es 2022 (t = 8) → 2023 es t = 9, 2024 es t = 10</small></div>
+      <ul>
+        <li>Expresar siempre con <b>unidades</b> (millones de pesos, unidades vendidas…).</li>
+        <li>Es una <b>extrapolación</b> (fuera del período observado): supone que la tendencia sigue igual.</li>
+        <li><b>Representar la recta</b> en el gráfico de evolución: alcanza con <b>dos puntos</b> (por ejemplo, el primer t y el último pronosticado). Diferenciar los observados de los pronosticados (otro color, línea punteada).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>5 · Estacionalidad: índice estacional (IE)</p>
+      <p class="def"><b>Índice estacional:</b> conjunto de números que muestra el <b>valor relativo de la variable en cada período del año</b> (trimestre, mes). Su promedio debe ser <b>100 %</b>: la suma es 400 con trimestres y 1200 con meses.</p>
+      <p class="h-sub">Método del porcentaje medio (el único que se ve)</p>
+      <ol class="pasos">
+        <li><b>Paso 1)</b> Calcular el <b>promedio de cada año</b> (\( \bar{Y} \) del año).</li>
+        <li><b>Paso 2)</b> Expresar cada dato como <b>% del promedio de su año</b>: \( \frac{Y_i}{\bar{Y}_{a\tilde{n}o}} \cdot 100 \).</li>
+        <li><b>Paso 3)</b> Promediar (media aritmética) los porcentajes del <b>mismo período en los distintos años</b> → ese es el IE de cada trimestre.</li>
+        <li><b>Paso 4)</b> Si los IE no suman 400 (o 1200), <b>ajustarlos</b> multiplicándolos por \( \frac{400}{\sum IE} \).</li>
+      </ol>
+      <div class="note"><b>Cómo se lee:</b> IE &gt; 100 → ese trimestre vende por encima del promedio anual (pico); IE &lt; 100 → por debajo (contracción). "IE = 124,48: en el 1.er trimestre las ventas son un 24,48 % mayores que el promedio del año."</div>
+      <p class="h-sub">Datos desestacionalizados (ajustados a la variación estacional)</p>
+      <div class="fbox">\[ \text{Desestacionalizado} = \frac{Y_i}{IE} \cdot 100 \]<small>Quedan T · C · A: sin el efecto de la estación</small></div>
+      <ul>
+        <li>Sirven para <b>identificar la tendencia</b>, <b>comparar períodos</b> sin que la estación los distorsione y hacer <b>pronósticos más precisos</b> (eliminan el "ruido" estacional).</li>
+      </ul>
+      <p class="h-sub">Pronóstico con tendencia y estacionalidad</p>
+      <div class="fbox">\[ \hat{Y} = T_t \cdot \frac{IE}{100} \]<small>1) proyectar la tendencia con el t del trimestre futuro · 2) multiplicar por el IE de ese trimestre</small></div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>6 · Ciclos y aleatoriedad</p>
+      <ul>
+        <li><b>Ciclos (C):</b> los más complejos de obtener. A los datos desestacionalizados se los divide por la tendencia (\( Y / (T \cdot E) = C \cdot A \)) y se aplica un <b>promedio móvil corto</b> (3, 5 o 7) para suavizar lo aleatorio: queda C.</li>
+        <li><b>Aleatoriedad (A):</b> se aísla dividiendo \( Y / (T \cdot E \cdot C) \). Suele ser de poca magnitud: <b>pequeñas variaciones muy frecuentes, grandes desviaciones poco frecuentes</b>. No tiene patrón.</li>
+        <li><b>Comparación de datos:</b> cuidado al comparar meses de distinta cantidad de días, años bisiestos o días hábiles distintos (feriados, huelgas). El ajuste queda a criterio del investigador.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>Cómo lo pregunta el parcial → qué hacer</p>
+      <div class="tbl-scroll">
+      <table class="eco">
+        <thead><tr><th>Consigna</th><th>Qué hacer</th></tr></thead>
+        <tbody>
+          <tr><td>"Interpretá la pendiente y la ordenada de la tendencia"</td><td>b = cambio promedio por año (con signo y unidades) · a = tendencia en t = 0 (decir el año).</td></tr>
+          <tr><td>"¿Qué año corresponde a t = 0?"</td><td>El año anterior al que tiene t = 1.</td></tr>
+          <tr><td>"Completá los valores de tendencia / índices temporales"</td><td>Reemplazar cada t en \( T_t = a + bt \).</td></tr>
+          <tr><td>"Completá los relativos"</td><td>\( R_t = Y_t / T_t \cdot 100 \), solo en años observados; redondear a 2 decimales.</td></tr>
+          <tr><td>"¿Qué efecto elimina el relativo?"</td><td>El de la <b>tendencia</b>: muestra la posición del dato respecto de ella.</td></tr>
+          <tr><td>"Mayor y menor relativo"</td><td>El año más por encima y el más por debajo de la tendencia (decir en qué %).</td></tr>
+          <tr><td>"Pronosticá 2026 y 2027"</td><td>t siguiente al último observado → \( T_t \), con unidades.</td></tr>
+          <tr><td>"Gráfico de evolución con la recta"</td><td>Línea de los observados + recta con 2 puntos hasta el último año pronosticado; diferenciar observados de pronósticos.</td></tr>
+          <tr><td>"Gráfico de relativos con referencia en 100"</td><td>Rt por año + línea horizontal en 100; decir qué años quedan arriba, abajo y sobre.</td></tr>
+          <tr><td>"Rt = 100 → no hubo cambios respecto del año anterior"</td><td><b>Falso:</b> Rt compara con la <b>tendencia</b>, no con el año anterior. Mirar los Yt para saber si cambió.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="h-main"><span class="dot"></span>Ojo: errores del material de U6</p>
+      <ul>
+        <li>Apunte pág. 10: escribe la recta como \( \hat{Y} = 91{,}7 - 3{,}8211\,t \). Es con <b>+</b>: \( \hat{Y} = 91{,}7 + 3{,}8211\,t \) (así figura en la pág. 5 y en el Genially).</li>
+        <li>Apunte pág. 10, tabla del pronóstico 2018: la columna "T" muestra los IE. La tendencia es 183,41 · 187,23 · 191,05 · 194,87 (\( t = 24 \dots 27 \)) y el pronóstico \( T \cdot IE/100 \) = 228,31 · 137,87 · 166,77 · 223,30.</li>
+        <li>La guía se titula "Trabajo Práctico N°5" pero es la de <b>Series de tiempo (U6)</b>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== FORMULERO ===================== -->
+  <section class="unit reveal" id="formulero" style="--accent:var(--u6)">
+    <div class="unit-head"><div class="unit-num">Σ</div>
+      <div class="unit-titles"><p class="u-kicker">Todo junto</p><h2>Formulero</h2></div></div>
+    <span class="unit-weight">Para repasar antes de entrar</span>
+    <p class="h-sub" style="--accent:var(--u4);color:var(--u4);text-decoration-color:var(--u4)">U4 · Dispersión y asimetría</p>
+    <div class="fgrid" style="--accent:var(--u4)">
+      <div class="fcard"><span class="lbl">Media (agrupados)</span><div class="f">\[ \bar{x} = \frac{\sum f_i \cdot x_i}{N} \]</div><div class="d">En DAIC xi es la marca de clase.</div></div>
+      <div class="fcard"><span class="lbl">Desvío</span><div class="f">\[ d = x_i - \bar{x} \qquad \sum d \cdot f_i = 0 \]</div><div class="d">Negativo = debajo de la media.</div></div>
+      <div class="fcard"><span class="lbl">Rango · Rango intercuartílico</span><div class="f">\[ R = x_{\max} - x_{\min} \qquad RQ = Q_3 - Q_1 \]</div><div class="d">RQ: amplitud del 50 % central.</div></div>
+      <div class="fcard"><span class="lbl">Desvío medio</span><div class="f">\[ DM = \frac{\sum |x_i - \bar{x}| \cdot f_i}{N} \]</div><div class="d">Unidad de la variable.</div></div>
+      <div class="fcard"><span class="lbl">Varianza</span><div class="f">\[ S^2 = \frac{\sum (x_i - \bar{x})^2 \cdot f_i}{N} \]</div><div class="d">Divisor N · unidad al cuadrado.</div></div>
+      <div class="fcard"><span class="lbl">Desvío estándar</span><div class="f">\[ S = \sqrt{S^2} \]</div><div class="d">Unidad de la variable.</div></div>
+      <div class="fcard"><span class="lbl">Coeficiente de variación</span><div class="f">\[ CV = \frac{S}{\bar{x}} \cdot 100 \]</div><div class="d">≤ 10 % homogénea, media representativa · menor CV = más homogénea.</div></div>
+      <div class="fcard"><span class="lbl">Asimetría absoluta y relativa</span><div class="f">\[ A_a = \bar{x} - Mo \qquad A_r = \frac{A_a}{S} \]</div><div class="d">&gt; 0 positiva (Mo &lt; Me &lt; x̄) · &lt; 0 negativa (x̄ &lt; Me &lt; Mo).</div></div>
+    </div>
+    <p class="h-sub" style="color:var(--u5);text-decoration-color:var(--u5)">U5 · Correlación y regresión</p>
+    <div class="fgrid" style="--accent:var(--u5)">
+      <div class="fcard"><span class="lbl">Recta de regresión</span><div class="f">\[ \hat{y} = a + b \cdot x \]</div><div class="d">Pasa por \( (\bar{x}; \bar{y}) \).</div></div>
+      <div class="fcard"><span class="lbl">Pendiente</span><div class="f">\[ b = \frac{N \sum XY - \sum X \sum Y}{N \sum X^2 - (\sum X)^2} \]</div><div class="d">Cambio promedio de Y por unidad de X.</div></div>
+      <div class="fcard"><span class="lbl">Ordenada al origen</span><div class="f">\[ a = \bar{y} - b \cdot \bar{x} \]</div><div class="d">Y estimado con X = 0 (¿está en el rango?).</div></div>
+      <div class="fcard"><span class="lbl">Correlación de Pearson</span><div class="f">\[ r = \frac{N \sum XY - \sum X \sum Y}{\sqrt{[N \sum X^2 - (\sum X)^2][N \sum Y^2 - (\sum Y)^2]}} \]</div><div class="d">−1 ≤ r ≤ 1 · intensidad por |r|.</div></div>
+      <div class="fcard"><span class="lbl">Determinación</span><div class="f">\[ R^2 = r^2 \cdot 100 \]</div><div class="d">% de la variación de Y explicada por X.</div></div>
+      <div class="fcard"><span class="lbl">Error estimado</span><div class="f">\[ e_i = y_i - \hat{y}_i \]</div><div class="d">MCO: \( \sum e_i^2 \) mínima.</div></div>
+    </div>
+    <p class="h-sub" style="color:var(--u6);text-decoration-color:var(--u6)">U6 · Series de tiempo</p>
+    <div class="fgrid">
+      <div class="fcard"><span class="lbl">Modelo multiplicativo</span><div class="f">\[ Y = T \cdot E \cdot C \cdot A \]</div><div class="d">Tendencia · estacionalidad · ciclos · aleatoriedad.</div></div>
+      <div class="fcard"><span class="lbl">Tendencia</span><div class="f">\[ T_t = a + b \cdot t \]</div><div class="d">b = cambio por período · a = valor en t = 0.</div></div>
+      <div class="fcard"><span class="lbl">Relativo cíclico</span><div class="f">\[ R_t = \frac{Y_t}{T_t} \cdot 100 \]</div><div class="d">Elimina la tendencia · &gt; 100 arriba, &lt; 100 abajo.</div></div>
+      <div class="fcard"><span class="lbl">Promedio móvil de orden 3</span><div class="f">\[ PM_3 = \frac{Y_{t-1} + Y_t + Y_{t+1}}{3} \]</div><div class="d">Suaviza; se ubica en el período central.</div></div>
+      <div class="fcard"><span class="lbl">Desestacionalizar</span><div class="f">\[ \frac{Y_i}{IE} \cdot 100 \]</div><div class="d">IE promedio 100 · suman 400 (trimestres).</div></div>
+      <div class="fcard"><span class="lbl">Pronóstico</span><div class="f">\[ \hat{Y} = T_t \quad \text{(anual)} \qquad \hat{Y} = T_t \cdot \frac{IE}{100} \quad \text{(trimestral)} \]</div><div class="d">t = siguiente al último observado.</div></div>
+    </div>
+  </section>
+
+  </div><!-- /view-resumen -->
+
+  <!-- ===================== QUIZ ===================== -->
+  <section id="view-quiz" class="modeview hidden">
+    <div class="qwrap">
+      <div class="qtop"><span>Pregunta <b id="q-idx">1</b> / <span id="q-total">0</span></span><span>Aciertos <b id="q-score">0</b></span><button class="btn ghost" id="q-restart">Reiniciar</button></div>
+      <div class="qcard" id="quiz-card"></div>
+    </div>
+  </section>
+
+  <!-- ===================== ESCRIBIR ===================== -->
+  <section id="view-escribir" class="modeview hidden">
+    <div class="qwrap">
+      <div class="qtop"><span>Pregunta <b id="e-idx">1</b> / <span id="e-total">0</span></span><span>De memoria <b id="e-score">0</b></span><button class="btn ghost" id="e-restart">Reiniciar</button></div>
+      <div class="qcard" id="esc-card"></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>U4 · U5 · U6 · Estadística Aplicada a los Negocios</p>
+  </footer>
+
+</div>
+
+<script>
+  /* ============ AUTO-ACTUALIZADOR ============ */
+  /* Bump BUILD en cada deploy: las pestañas abiertas detectan la versión nueva y recargan solas. */
+  const BUILD='2026-11-13-1';
+  async function checkUpdate(){
+    try{
+      if(location.protocol==='file:')return;
+      const r=await fetch(location.pathname+'?_cb='+Math.floor(Date.now()/30000),{cache:'no-store'});
+      if(!r.ok)return;
+      const t=await r.text();
+      const m=t.match(/const BUILD='([^']+)'/);
+      if(m&&m[1]!==BUILD){location.reload();}
+    }catch(e){}
+  }
+  setInterval(checkUpdate,60000);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkUpdate();});
+
+  /* ============ KATEX ============ */
+  const KOPT={delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};
+  function typeset(el){if(window.renderMathInElement)renderMathInElement(el,KOPT);}
+  document.addEventListener('DOMContentLoaded',()=>typeset(document.body));
+
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.06});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const chips={};document.querySelectorAll('.chip').forEach(c=>chips[c.getAttribute('href').slice(1)]=c);
+  const spy=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
+    Object.values(chips).forEach(c=>c.style.cssText='');
+    const c=chips[e.target.id];if(c){c.style.background='var(--ink)';c.style.color='var(--paper)';}
+  }})},{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('section.unit').forEach(s=>spy.observe(s));
+
+  /* ============ BANCO DE PREGUNTAS (apuntes de clase) ============ */
+  const EC=[
+   {u:'U4 · Dispersión: conceptos',c:'var(--u4)',items:[
+     {q:'¿Qué miden las medidas de dispersión?',a:'Qué tan dispersos o concentrados están los datos con respecto a la media aritmética (cuán homogéneos son).'},
+     {q:'¿Cuáles son las medidas de dispersión absolutas?',a:'Rango, rango intercuartílico, desvío medio, varianza y desvío estándar.'},
+     {q:'¿Cuál es la única medida de dispersión relativa y por qué es relativa?',a:'El coeficiente de variación: se expresa en porcentaje (no tiene unidad), por eso permite comparar distribuciones distintas.'},
+     {q:'¿Qué medida usa el profesor "por excelencia" y para qué?',a:'El coeficiente de variación: da un porcentaje de variabilidad y permite comparar entre distintas poblaciones.'},
+     {q:'¿Qué es un desvío?',a:'La diferencia entre un valor y la media: d = xi − x̄. Negativo si el dato está por debajo de la media, positivo si está por encima.'},
+     {q:'¿Cuánto da la suma de los desvíos (por su frecuencia)?',a:'Cero (o casi cero por redondeo). Por eso se usan valores absolutos o cuadrados. Si da lejos de 0, la media está mal.'},
+     {q:'¿Qué indica el rango y cuál es su principal desventaja?',a:'La distancia entre el valor máximo y el mínimo. Usa solo dos datos y es muy sensible a los extremos.'},
+     {q:'¿Qué indica el rango intercuartílico?',a:'RQ = Q3 − Q1: la amplitud del intervalo donde cae el 50 % central de los datos. No le afectan los extremos.'}
+   ]},
+   {u:'U4 · Desvío medio, varianza, desvío, CV',c:'var(--u4)',items:[
+     {q:'¿Qué es el desvío medio y en qué unidad se expresa?',a:'El promedio de los desvíos en valor absoluto respecto de la media. En la misma unidad que la variable.'},
+     {q:'Fórmula del desvío medio para datos agrupados',a:'\\( DM = \\dfrac{\\sum |x_i - \\bar{x}| \\cdot f_i}{N} \\)'},
+     {q:'¿Qué es la varianza?',a:'El promedio de los desvíos al cuadrado respecto de la media.'},
+     {q:'Fórmula de la varianza para datos agrupados (como en la materia)',a:'\\( S^2 = \\dfrac{\\sum (x_i - \\bar{x})^2 \\cdot f_i}{N} \\) — con divisor N, no n − 1.'},
+     {q:'¿En qué unidad está la varianza y para qué sirve?',a:'En la unidad al cuadrado (min², pesos²). Sirve para llegar al desvío estándar.'},
+     {q:'¿Cómo se obtiene el desvío estándar y en qué unidad está?',a:'S = raíz cuadrada de la varianza. Está en la misma unidad que la variable.'},
+     {q:'Fórmula del coeficiente de variación',a:'\\( CV = \\dfrac{S}{\\bar{x}} \\cdot 100 \\) (en %).'},
+     {q:'¿Qué significa un CV ≤ 10 %?',a:'Dispersión baja: los datos están cerca de su media, la distribución es homogénea y la media es representativa.'},
+     {q:'¿Qué significa un CV mayor al 10 %?',a:'Dispersión considerable o alta: la distribución no es homogénea y la media deja de ser representativa.'},
+     {q:'Si comparás dos distribuciones, ¿cuál es más homogénea?',a:'La de menor coeficiente de variación.'},
+     {q:'¿Con qué medida comparás la dispersión absoluta de dos distribuciones?',a:'Con el desvío estándar (o el desvío medio): mayor S = mayor dispersión absoluta.'},
+     {q:'B tiene mayor desvío estándar que A. ¿Es necesariamente menos homogéneo?',a:'No. La homogeneidad relativa se decide con el CV: si B tiene una media mucho mayor, puede tener mayor S y a la vez menor CV (más homogéneo).'},
+     {q:'¿Qué error típico se comete al calcular los desvíos en DAIC?',a:'Usar la frecuencia en vez de la marca de clase xi en la resta xi − x̄.'},
+     {q:'¿A cuántos decimales se redondean los resultados finales?',a:'A dos decimales, trabajando con todos los decimales en el medio.'}
+   ]},
+   {u:'U4 · Asimetría',c:'var(--u4)',items:[
+     {q:'¿Qué mide la asimetría?',a:'El grado de simetría de la distribución respecto de la media: cuánto se separan media, mediana y moda.'},
+     {q:'¿Cómo se ordenan las medidas en una distribución simétrica?',a:'Media = mediana = moda.'},
+     {q:'¿Cómo se ordenan las medidas con asimetría positiva (a la derecha)?',a:'Moda < mediana < media: la cola está a la derecha y arrastra la media.'},
+     {q:'¿Cómo se ordenan las medidas con asimetría negativa (a la izquierda)?',a:'Media < mediana < moda: la cola está a la izquierda.'},
+     {q:'Fórmulas de la asimetría absoluta y relativa',a:'\\( A_a = \\bar{x} - Mo \\) · \\( A_r = \\dfrac{A_a}{S} \\) (coeficiente de Pearson).'},
+     {q:'¿Qué indica el signo de Aa o Ar?',a:'≈ 0 simétrica · positivo: asimetría positiva (a la derecha) · negativo: asimetría negativa (a la izquierda).'},
+     {q:'¿Para qué sirve la asimetría relativa Ar y no solo Aa?',a:'Ar no tiene unidad (está medida en desvíos estándar): permite comparar la asimetría de distribuciones de distinta escala.'},
+     {q:'¿Qué medida de posición es más representativa en una distribución asimétrica?',a:'La mediana, porque no la afectan los valores extremos.'}
+   ]},
+   {u:'U5 · Relación y diagrama',c:'var(--u5)',items:[
+     {q:'¿Qué tres aspectos se consideran en la relación entre dos variables?',a:'Existencia (¿hay relación?), forma (¿cómo se da?) e intensidad o fuerza (¿qué tan fuerte es?).'},
+     {q:'¿Cómo se llama la variable X y en qué eje va?',a:'Independiente o explicativa. Eje horizontal.'},
+     {q:'¿Cómo se llama la variable Y y en qué eje va?',a:'Dependiente o explicada. Eje vertical.'},
+     {q:'¿Qué diferencia hay entre análisis de regresión y de correlación?',a:'Regresión: encontrar el modelo matemático (la recta) para estimar Y a partir de X; supone causalidad. Correlación: medir la intensidad de la relación lineal; no supone causalidad.'},
+     {q:'¿Qué es un diagrama de dispersión?',a:'La representación gráfica de los pares ordenados (x; y). Permite ver si hay relación, su forma y su intensidad.'},
+     {q:'¿Por dónde se empieza siempre un análisis de correlación?',a:'Por el diagrama de dispersión.'},
+     {q:'¿Qué elementos no pueden faltar en el diagrama hecho a mano?',a:'Ejes con escala, rótulo de cada eje con la variable y su unidad, y título "[Y] en función de [X]".'},
+     {q:'¿Cuándo la relación es directa?',a:'Cuando las dos variables se mueven en el mismo sentido: las dos suben o las dos bajan. b y r positivos.'},
+     {q:'¿Cuándo la relación es inversa?',a:'Cuando una sube y la otra baja. b y r negativos.'},
+     {q:'¿"Creciente" se dice de la relación o de la recta?',a:'De la recta. La relación se dice directa o inversa.'}
+   ]},
+   {u:'U5 · Recta de regresión',c:'var(--u5)',items:[
+     {q:'Ecuación de la recta de regresión',a:'\\( \\hat{y} = a + b \\cdot x \\) — el sombrero indica valor estimado.'},
+     {q:'¿Qué es el error estimado?',a:'La diferencia entre el valor observado y el estimado por la recta: \\( e_i = y_i - \\hat{y}_i \\).'},
+     {q:'¿Qué hace el método de mínimos cuadrados?',a:'Elige a y b de modo que la suma de los errores al cuadrado sea mínima.'},
+     {q:'Fórmula de la pendiente b con sumatorias',a:'\\( b = \\dfrac{N \\sum XY - \\sum X \\sum Y}{N \\sum X^2 - (\\sum X)^2} \\)'},
+     {q:'Fórmula de la ordenada al origen a',a:'\\( a = \\bar{y} - b \\cdot \\bar{x} \\)'},
+     {q:'¿Por qué punto pasa siempre la recta de regresión?',a:'Por el punto de las medias \\( (\\bar{x}; \\bar{y}) \\).'},
+     {q:'¿Cómo se interpreta la pendiente b?',a:'Cuánto cambia en promedio Y (estimado) cuando X aumenta una unidad; con las unidades de ambas variables.'},
+     {q:'¿Cómo se interpreta la ordenada al origen a?',a:'El valor estimado de Y cuando X = 0. Si X = 0 está fuera del rango observado (o da algo absurdo), no tiene sentido práctico.'},
+     {q:'¿Cuántos puntos hacen falta para trazar la recta y cómo se eligen?',a:'Dos: se eligen dos valores de x (ej.: mínimo y máximo), se calcula su ŷ y se unen. Hay que indicarlos.'},
+     {q:'¿Por qué no conviene redondear b antes de calcular a?',a:'Porque el error de redondeo se multiplica por x̄ y cambia a.'}
+   ]},
+   {u:'U5 · r, R² y estimación',c:'var(--u5)',items:[
+     {q:'¿Qué mide el coeficiente de correlación r?',a:'La intensidad y el sentido de la relación lineal entre X e Y: qué tan dispersos están los puntos alrededor de la recta.'},
+     {q:'¿Entre qué valores está r?',a:'Entre −1 y 1. Si da fuera de ese rango, está mal calculado.'},
+     {q:'Fórmula de r con sumatorias',a:'\\( r = \\dfrac{N \\sum XY - \\sum X \\sum Y}{\\sqrt{[N \\sum X^2 - (\\sum X)^2][N \\sum Y^2 - (\\sum Y)^2]}} \\)'},
+     {q:'¿Qué dice el signo de r y qué dice su valor absoluto?',a:'El signo: el sentido (directa o inversa). El valor absoluto: la intensidad.'},
+     {q:'Escala de la cátedra: ¿qué correlación es |r| entre 0,50 y 0,69?',a:'Moderada.'},
+     {q:'Escala de la cátedra: ¿qué correlación es |r| entre 0,70 y 0,84?',a:'Significativa.'},
+     {q:'Escala de la cátedra: ¿qué correlación es |r| entre 0,85 y 0,95?',a:'Fuerte.'},
+     {q:'Escala de la cátedra: ¿qué correlación es |r| entre 0,20 y 0,49?',a:'Débil (entre 0,10 y 0,19 es muy débil).'},
+     {q:'¿Qué significa r = 0?',a:'Correlación nula: no hay relación lineal (puede haber una relación no lineal).'},
+     {q:'¿Con cuál hay más asociación: r = 0,92 o r = −0,95?',a:'Con r = −0,95: la intensidad se compara en valor absoluto (0,95 > 0,92).'},
+     {q:'¿Cómo se calcula R²?',a:'R² = r² · 100 (en %).'},
+     {q:'¿Cómo se interpreta R²?',a:'Como el porcentaje de la variación de Y que está explicada por la variación de X en la recta; el resto se debe a otros factores.'},
+     {q:'¿Qué es interpolar?',a:'Estimar Y para un x dentro del rango observado de X. Es confiable.'},
+     {q:'¿Qué es extrapolar y qué precaución requiere?',a:'Estimar Y para un x fuera del rango observado. Pierde precisión al alejarse y supone que la relación sigue igual: hay que tomarlo con precaución.'},
+     {q:'Si X está en millones de pesos, ¿qué valor reemplazás para $4.500.000?',a:'x = 4,5. Y al responder, volver a la unidad de Y (ej.: cientos de unidades → multiplicar por 100).'}
+   ]},
+   {u:'U6 · Series y componentes',c:'var(--u6)',items:[
+     {q:'¿Qué es una serie de tiempo?',a:'Un conjunto de observaciones tomadas en instantes específicos, generalmente a intervalos iguales. Y = F(t).'},
+     {q:'¿Con qué gráfico se representa una serie de tiempo?',a:'Con un gráfico de líneas (de evolución): tiempo en el eje horizontal, valores en el vertical.'},
+     {q:'¿Cuál es el modelo de componentes que se usa en el curso?',a:'El multiplicativo: Y = T · E · C · A.'},
+     {q:'¿Qué es la tendencia (T)?',a:'El movimiento a largo plazo: la dirección general de la serie. Se representa con una recta o curva.'},
+     {q:'¿Qué es la estacionalidad (E)?',a:'Esquemas idénticos o casi idénticos que se repiten en los mismos períodos de años sucesivos (Navidad, verano, Día de la Madre).'},
+     {q:'¿Qué son los ciclos (C)?',a:'Oscilaciones alrededor de la tendencia, de duración irregular (varios años): prosperidad, recesión, depresión y recuperación.'},
+     {q:'¿Qué es la aleatoriedad (A)?',a:'Movimientos esporádicos por sucesos de azar (sequías, huelgas, elecciones). No tienen patrón.'},
+     {q:'¿Para qué sirve un promedio móvil?',a:'Para suavizar la serie: reduce la variación y elimina fluctuaciones bruscas, así se ve si sube, baja o se mantiene.'},
+     {q:'¿Dónde se ubica un promedio móvil de orden 3?',a:'En el período central de los tres que promedia (el primero y el último quedan sin valor).'}
+   ]},
+   {u:'U6 · Tendencia, relativos y pronóstico',c:'var(--u6)',items:[
+     {q:'¿Con qué método se estima la tendencia?',a:'Con mínimos cuadrados: Tt = a + b·t, usando el tiempo codificado t como variable X.'},
+     {q:'¿Cómo se interpreta b en la recta de tendencia?',a:'Lo que aumenta (o disminuye) en promedio la tendencia de Y por cada período (por año).'},
+     {q:'¿Cómo se interpreta a en la recta de tendencia?',a:'El valor de tendencia estimado para t = 0; hay que decir a qué año corresponde.'},
+     {q:'Si t = 1 corresponde a 2019, ¿qué año es t = 0?',a:'2018: el año anterior al primero observado.'},
+     {q:'Fórmula del relativo cíclico',a:'\\( R_t = \\dfrac{Y_t}{T_t} \\cdot 100 \\)'},
+     {q:'¿Qué efecto elimina el relativo Rt?',a:'El de la tendencia: muestra dónde está cada dato respecto de su valor de tendencia.'},
+     {q:'¿Qué significa Rt > 100?',a:'Que el valor observado está por encima de la tendencia (en Rt − 100 %).'},
+     {q:'¿Qué significa Rt = 100? ¿Quiere decir que no hubo cambios respecto del año anterior?',a:'Que el valor observado coincide con la tendencia. No: Rt compara con la tendencia, no con el año anterior.'},
+     {q:'¿Se calculan relativos para los años pronosticados?',a:'No: no hay valor observado Yt, solo la tendencia.'},
+     {q:'¿Cómo se pronostica con la recta de tendencia?',a:'Se reemplaza en Tt = a + b·t el t del año futuro (el siguiente al último observado) y se da el resultado con unidades.'},
+     {q:'¿Cómo se construye el gráfico de relativos?',a:'Rt de cada año observado unidos por una línea, con una referencia horizontal en 100: arriba = por encima de la tendencia, abajo = por debajo.'},
+     {q:'¿Qué es el índice estacional y cuánto deben sumar los trimestrales?',a:'Los valores relativos de la variable en cada período del año; promedian 100 %, así que suman 400 (1200 con meses).'},
+     {q:'¿Cómo se calcula el índice estacional por el método del porcentaje medio?',a:'Cada dato como % del promedio de su año; se promedian los % del mismo trimestre en los distintos años; si no suman 400, se ajustan.'},
+     {q:'¿Cómo se desestacionaliza un dato y para qué sirve?',a:'Dividiéndolo por su IE (·100). Sirve para ver la tendencia, comparar períodos sin el efecto de la estación y pronosticar mejor.'},
+     {q:'¿Cómo se pronostica un trimestre con tendencia y estacionalidad?',a:'Se proyecta la tendencia con el t del trimestre futuro y se multiplica por su índice estacional (IE/100).'}
+   ]}
+  ];
+  const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+  const flat=EC.flatMap(t=>t.items.map(it=>({...it,u:t.u,c:t.c})));
+
+  /* ---- QUIZ ---- */
+  let quiz=[],qi=0,qscore=0;
+  function buildQuiz(){
+    quiz=shuffle(EC.flatMap(t=>t.items.map(it=>{
+      let pool=t.items.filter(x=>x.a!==it.a).map(x=>x.a);
+      if(pool.length<3)pool=pool.concat(shuffle(flat.filter(x=>x.u!==t.u).map(x=>x.a)));
+      return {u:t.u,c:t.c,q:it.q,correct:it.a,options:shuffle([it.a,...shuffle(pool).slice(0,3)])};
+    })));
+    qi=0;qscore=0;document.getElementById('q-total').textContent=quiz.length;renderQ();
+  }
+  function renderQ(){
+    document.getElementById('q-idx').textContent=qi+1;
+    document.getElementById('q-score').textContent=qscore;
+    const it=quiz[qi],card=document.getElementById('quiz-card');
+    card.style.setProperty('--accent',it.c);
+    card.innerHTML='<div class="qgroup">'+it.u+'</div><div class="qq">'+it.q+'</div><div id="opts">'+it.options.map((o,i)=>'<button class="opt" data-i="'+i+'">'+o+'</button>').join('')+'</div><div class="fb" id="fb"></div><div class="qactions"><button class="btn hidden" id="q-next">Siguiente →</button></div>';
+    typeset(card);
+    const opts=card.querySelectorAll('.opt');
+    opts.forEach(b=>b.addEventListener('click',()=>{
+      const ok=it.options[+b.dataset.i]===it.correct;
+      opts.forEach(x=>{x.disabled=true;if(it.options[+x.dataset.i]===it.correct){x.classList.add('correct');x.innerHTML+=' <span class="mk">✓</span>';}});
+      const fb=document.getElementById('fb');
+      if(ok){qscore++;fb.textContent='¡Correcto!';fb.className='fb ok';}
+      else{b.classList.add('wrong');b.innerHTML+=' <span class="mk">✕</span>';fb.textContent='La respuesta correcta es la marcada en verde.';fb.className='fb no';}
+      document.getElementById('q-score').textContent=qscore;
+      const n=document.getElementById('q-next');n.classList.remove('hidden');
+      n.textContent=qi+1<quiz.length?'Siguiente →':'Ver resultado';
+      n.onclick=()=>{qi+1<quiz.length?(qi++,renderQ()):resultQ();};
+    }));
+  }
+  function resultQ(){
+    const pct=Math.round(qscore/quiz.length*100),card=document.getElementById('quiz-card');
+    card.style.setProperty('--accent','var(--u6)');
+    card.innerHTML='<div class="qgroup">Resultado</div><div class="qq">'+qscore+'/'+quiz.length+' · '+pct+'%</div><p style="color:var(--ink-soft);margin-bottom:20px">'+(pct>=80?'Te lo sabés.':pct>=50?'Vas bien; repasá las que fallaste.':'Volvé al Resumen y reintentá.')+'</p><div class="qactions"><button class="btn" id="q-again">Reintentar</button></div>';
+    document.getElementById('q-idx').textContent=quiz.length;
+    document.getElementById('q-again').onclick=buildQuiz;
+  }
+
+  /* ---- ESCRIBIR ---- */
+  let esc=[],ei=0,escore=0;
+  function buildEsc(){esc=shuffle(flat);ei=0;escore=0;document.getElementById('e-total').textContent=esc.length;renderE();}
+  function renderE(){
+    document.getElementById('e-idx').textContent=ei+1;
+    document.getElementById('e-score').textContent=escore;
+    const it=esc[ei],card=document.getElementById('esc-card');
+    card.style.setProperty('--accent',it.c);
+    card.innerHTML='<div class="qgroup">'+it.u+'</div><div class="qq">'+it.q+'</div><textarea id="e-input" class="esc-input" placeholder="Escribí tu respuesta de memoria…  (Ctrl+Enter para revelar)" spellcheck="false"></textarea><div class="qactions"><button class="btn" id="e-reveal">Revelar respuesta</button></div><div id="e-answer" class="esc-answer hidden"></div>';
+    const ta=document.getElementById('e-input');ta.focus();
+    function reveal(){
+      if(ta.disabled)return;
+      const yours=(ta.value.trim()||'(no escribiste nada)').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+      const ans=document.getElementById('e-answer');
+      ans.innerHTML='<div class="esc-yours"><span class="esc-lbl">Lo que escribiste</span><p>'+yours+'</p></div><div class="esc-ok"><span class="esc-lbl">Respuesta</span><p class="ans">'+it.a+'</p></div><div class="esc-rate">¿Te salió de memoria?<button class="rate" data-r="1">Sí</button><button class="rate" data-r="m">Más o menos</button><button class="rate" data-r="0">No</button></div>';
+      ans.classList.remove('hidden');typeset(ans);
+      document.getElementById('e-reveal').disabled=true;ta.disabled=true;
+      ans.querySelectorAll('.rate').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.r==='1')escore++;ei+1<esc.length?(ei++,renderE()):resultE();}));
+      ans.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    ta.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')reveal();});
+    document.getElementById('e-reveal').addEventListener('click',reveal);
+  }
+  function resultE(){
+    document.getElementById('e-idx').textContent=esc.length;
+    document.getElementById('e-score').textContent=escore;
+    const card=document.getElementById('esc-card');card.style.setProperty('--accent','var(--u6)');
+    card.innerHTML='<div class="qgroup">Resultado</div><div class="qq">'+escore+'/'+esc.length+' de memoria</div><div class="qactions"><button class="btn" id="e-again">Reintentar</button></div>';
+    document.getElementById('e-again').onclick=buildEsc;
+  }
+
+  /* ---- NAVEGACIÓN DE MODOS ---- */
+  const views={resumen:document.getElementById('view-resumen'),quiz:document.getElementById('view-quiz'),escribir:document.getElementById('view-escribir')};
+  document.getElementById('modes').addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b)return;
+    document.querySelectorAll('#modes button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const m=b.dataset.mode;
+    Object.entries(views).forEach(([k,el])=>el.classList.toggle('hidden',k!==m));
+    document.getElementById('navchips').classList.toggle('hidden',m!=='resumen');
+    if(m==='quiz'&&!quiz.length)buildQuiz();
+    if(m==='escribir'&&!esc.length)buildEsc();
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+  document.getElementById('q-restart').addEventListener('click',buildQuiz);
+  document.getElementById('e-restart').addEventListener('click',buildEsc);
+</script>
+</body>
+</html>
