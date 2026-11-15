@@ -236,7 +236,7 @@
       <p class="def">Las medidas de dispersión dicen <b>qué tan dispersos o concentrados</b> están los datos <b>con respecto a la media aritmética</b> \( \bar{x} \). Casi todas necesitan la media: si no te la dan, la calculás primero.</p>
       <p class="def">Medir la variabilidad = obtener un número que diga <b>cuán homogéneos</b> son los datos entre sí.</p>
       <div class="grid2">
-        <div class="mini"><b>Absolutas</b> (en la unidad de la variable)<br>Rango · Rango intercuartílico · Desvío medio · Varianza · Desvío estándar.</div>
+        <div class="mini"><b>Absolutas</b> (en la unidad de la variable)<br>Desvío medio · Varianza · Desvío estándar.</div>
         <div class="mini"><b>Relativa</b> (en %, la única)<br><b>Coeficiente de variación.</b> Es la que se usa <b>"por excelencia"</b>: permite <b>comparar</b> poblaciones distintas.</div>
       </div>
     </div>
@@ -261,27 +261,7 @@
     </div>
 
     <div class="card">
-      <p class="h-main"><span class="dot"></span>1 · Rango &nbsp;R</p>
-      <div class="fbox">\[ R = x_{\max} - x_{\min} \]<small>Distancia entre los valores extremos</small></div>
-      <div class="grid2">
-        <div class="mini okk"><b>Ventajas</b><ul><li>Fácil de calcular y entender.</li><li>Da una idea rápida de la dispersión.</li></ul></div>
-        <div class="mini danger"><b>Desventajas</b><ul><li>Usa solo dos valores.</li><li>Muy sensible a los extremos.</li><li>No dice cómo se distribuyen los datos dentro del rango.</li></ul></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <p class="h-main"><span class="dot"></span>2 · Rango intercuartílico &nbsp;RQ</p>
-      <div class="fbox">\[ RQ = Q_3 - Q_1 \]<small>Amplitud donde cae el 50 % central de los datos</small></div>
-      <p class="def">Fuera de Q1 queda el 25 % más bajo y fuera de Q3 el 25 % más alto: entre los dos queda el <b>50 % central</b>.</p>
-      <div class="note"><b>Frase modelo:</b> "El 50 % de los datos centrales cae entre Q1 y Q3; la amplitud de ese intervalo es RQ [unidades]."</div>
-      <div class="grid2" style="margin-top:12px">
-        <div class="mini okk"><b>Ventajas</b><ul><li>Mejor que el rango: no le afectan los extremos.</li><li>Muestra dónde se concentran los datos.</li></ul></div>
-        <div class="mini danger"><b>Desventajas</b><ul><li>No usa todos los datos (descarta la mitad).</li></ul></div>
-      </div>
-    </div>
-
-    <div class="card">
-      <p class="h-main"><span class="dot"></span>3 · Desvío medio &nbsp;DM</p>
+      <p class="h-main"><span class="dot"></span>1 · Desvío medio &nbsp;DM</p>
       <p class="def"><b>Promedio de los desvíos en valor absoluto</b> respecto de la media.</p>
       <div class="fbox">\[ \text{Sin agrupar:}\quad DM = \frac{\sum |x_i - \bar{x}|}{N} \]
         <span class="sep"></span>\[ \text{Agrupados:}\quad DM = \frac{\sum |x_i - \bar{x}| \cdot f_i}{N} \]
@@ -290,7 +270,7 @@
     </div>
 
     <div class="card">
-      <p class="h-main"><span class="dot"></span>4 · Varianza &nbsp;S²</p>
+      <p class="h-main"><span class="dot"></span>2 · Varianza &nbsp;S²</p>
       <p class="def"><b>Promedio de los desvíos al cuadrado.</b></p>
       <div class="fbox">\[ \text{Sin agrupar:}\quad S^2 = \frac{\sum (x_i - \bar{x})^2}{N} \]
         <span class="sep"></span>\[ \text{Agrupados:}\quad S^2 = \frac{\sum (x_i - \bar{x})^2 \cdot f_i}{N} \]
@@ -302,7 +282,7 @@
     </div>
 
     <div class="card">
-      <p class="h-main"><span class="dot"></span>5 · Desvío estándar (o típico) &nbsp;S · DE</p>
+      <p class="h-main"><span class="dot"></span>3 · Desvío estándar (o típico) &nbsp;S · DE</p>
       <div class="fbox">\[ S = \sqrt{S^2} \]<small>Vuelve a la unidad de la variable · calculás una y obtenés la otra</small></div>
       <ul>
         <li>Es la medida de dispersión absoluta más difundida. Ventajas: usa todos los datos y está en la misma unidad que la variable.</li>
@@ -312,7 +292,7 @@
     </div>
 
     <div class="card">
-      <p class="h-main"><span class="dot"></span>6 · Coeficiente de variación &nbsp;CV <span class="tag">por excelencia</span></p>
+      <p class="h-main"><span class="dot"></span>4 · Coeficiente de variación &nbsp;CV <span class="tag">por excelencia</span></p>
       <p class="def">Relaciona el desvío estándar con la media. Es la <b>única medida de dispersión relativa</b>: se expresa en <b>%</b> y no tiene unidad, por eso sirve para comparar variables con medias o unidades distintas.</p>
       <div class="fbox">\[ CV = \frac{S}{\bar{x}} \cdot 100 \]<small>Cuanto más lejos de 0 %, mayor variabilidad</small></div>
       <div class="tbl-scroll">
@@ -328,7 +308,7 @@
     </div>
 
     <div class="card">
-      <p class="h-main"><span class="dot"></span>7 · Comparar dos distribuciones</p>
+      <p class="h-main"><span class="dot"></span>5 · Comparar dos distribuciones</p>
       <div class="tbl-scroll">
       <table class="eco">
         <thead><tr><th>Pregunta</th><th>Qué medida mirar</th></tr></thead>
@@ -344,7 +324,7 @@
     </div>
 
     <div class="card">
-      <p class="h-main"><span class="dot"></span>8 · Asimetría <span class="tag">forma de la distribución</span></p>
+      <p class="h-main"><span class="dot"></span>6 · Asimetría <span class="tag">forma de la distribución</span></p>
       <p class="def">Mide el <b>grado de simetría</b> de la distribución respecto de la media. Cuanto más asimétrica, más se separan media, mediana y moda; la <b>media</b> es la que más se desplaza <b>hacia la cola</b> (la arrastran los extremos).</p>
       <div class="tbl-scroll">
       <table class="eco">
@@ -363,14 +343,8 @@
       <ul>
         <li><b>Signo:</b> ≈ 0 → simétrica · <b>&gt; 0 → asimetría positiva</b> (a la derecha) · <b>&lt; 0 → asimetría negativa</b> (a la izquierda).</li>
         <li><b>Aa</b> está en la unidad de la variable: cuanto mayor su valor absoluto, mayor asimetría. <b>Ar</b> no tiene unidad: sirve para <b>comparar la asimetría</b> de dos distribuciones de distinta escala.</li>
-        <li>Si no se puede calcular la moda (o es bimodal): \( A_{s2} = \frac{3 \cdot (\bar{x} - Me)}{S} \).</li>
-        <li>En una distribución asimétrica, la medida de posición más representativa es la <b>mediana</b> (no la afectan los extremos).</li>
       </ul>
       <div class="note"><b>Frase modelo:</b> "Ar = 0,40: asimetría positiva (a la derecha); coincide con moda &lt; mediana &lt; media: la cola está hacia los valores altos, que arrastran la media."</div>
-      <details class="ej"><summary>Del apunte, fuera del modelo: Fisher y curtosis</summary><div class="ej-body">
-        <p><b>Coeficiente de Fisher:</b> \( A_F = \frac{\sum (x_i - \bar{x})^3 \cdot f_i}{N \cdot S^3} \). Mismo criterio de signo (0 simétrica, + positiva, − negativa).</p>
-        <p><b>Curtosis:</b> \( C_F = \frac{\sum (x_i - \bar{x})^4 \cdot f_i}{N \cdot S^4} - 3 \). Mide el apuntamiento comparado con la normal: = 0 mesocúrtica · &gt; 0 leptocúrtica (más apuntada) · &lt; 0 platicúrtica (más achatada).</p>
-      </div></details>
     </div>
 
     <div class="card">
@@ -409,9 +383,6 @@
       <p class="h-main"><span class="dot"></span>Ojo: errores del material de U4</p>
       <ul>
         <li>Filmina de varianza con \( n - 1 \): el profesor la corrigió en clase; se divide por <b>N</b> (el modelo de parcial también lo indica).</li>
-        <li>RQ de la filmina (turistas) usa Q3 = 110, que está mal (viene del error de U3). El correcto es Q3 = 155,83.</li>
-        <li>En clase dijo que "el cuartil 2 coincide con la media": coincide con la <b>mediana</b>.</li>
-        <li>"Rango semiintercuartílico" lo usó como sinónimo del RQ; en rigor el semiintercuartílico es \( (Q_3 - Q_1)/2 \).</li>
       </ul>
     </div>
   </section>
@@ -440,13 +411,6 @@
       </table>
       </div>
       <p class="def" style="margin-top:10px">Si el enunciado no lo dice, se decide por sentido común (qué influye en qué). Que una variable aparezca primero en el enunciado <b>no es regla</b>. Decidir el sentido de la causalidad es ajeno a la Estadística: lo decide el investigador por su conocimiento del tema.</p>
-      <div class="grid2" style="margin-top:12px">
-        <div class="mini"><b>Análisis de regresión</b><br>Encontrar el <b>modelo matemático</b> (la recta) que describe la relación y permite <b>estimar Y a partir de X</b>. Supone una relación causal de X hacia Y.</div>
-        <div class="mini"><b>Análisis de correlación</b><br><b>Medir qué tan intensa</b> es la relación lineal (r). No supone causalidad: da igual cuál es X y cuál Y.</div>
-      </div>
-      <details class="ej"><summary>Naturaleza de la relación (filmina)</summary><div class="ej-body">
-        <p>Dependencia causal unilateral (una influye en la otra y no al revés) · interdependencia (se influyen mutuamente, ej.: precio y cantidad) · dependencia indirecta (las dos dependen de una tercera) · covariación casual (coinciden por azar).</p>
-      </div></details>
     </div>
 
     <div class="card">
@@ -478,13 +442,11 @@
       <p class="h-main"><span class="dot"></span>2 · Recta de regresión por mínimos cuadrados</p>
       <p class="def">La recta que <b>mejor se ajusta</b> a la nube de puntos. Para cada \( x_i \) da un valor estimado \( \hat{y}_i \).</p>
       <div class="fbox">\[ \hat{y} = a + b \cdot x \]<small>El "sombrerito" indica valor estimado (teórico) · a = ordenada al origen · b = pendiente</small></div>
-      <p class="def"><b>Error estimado:</b> \( e_i = y_i - \hat{y}_i \) (observado menos estimado). El <b>método de mínimos cuadrados</b> (o de Gauss) elige a y b de modo que la <b>suma de los errores al cuadrado sea mínima</b>.</p>
       <p class="h-sub">Fórmulas</p>
       <div class="fbox">\[ b = \frac{N \sum XY - \sum X \cdot \sum Y}{N \sum X^2 - \left( \sum X \right)^2} \]
         <span class="sep"></span>\[ a = \bar{y} - b \cdot \bar{x} \]
         <small>Con las sumatorias de la tabla X · Y · X² · Y² · XY (la que trae el parcial) · N = cantidad de pares</small></div>
       <ul>
-        <li>Equivalentes del material: \( b = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2} \) (con desvíos) o \( b = r \cdot \frac{S_y}{S_x} \) (si tenés r y los desvíos).</li>
         <li>La recta <b>siempre pasa por el punto</b> \( (\bar{x}; \bar{y}) \): de ahí sale \( a = \bar{y} - b \bar{x} \). Sin las medias no hay recta.</li>
         <li><b>No redondear b antes de calcular a</b>: el error se multiplica por \( \bar{x} \).</li>
         <li>El <b>signo de b</b> tiene que coincidir con lo que anticipaste en el diagrama.</li>
@@ -505,7 +467,6 @@
       <div class="fbox">\[ r = \frac{N \sum XY - \sum X \sum Y}{\sqrt{\left[ N \sum X^2 - (\sum X)^2 \right] \cdot \left[ N \sum Y^2 - (\sum Y)^2 \right]}} \]
         <small>Mismo numerador que b · el denominador es una raíz: nunca negativo · \( -1 \le r \le 1 \)</small></div>
       <ul>
-        <li>Con desvíos ("fórmula de trabajo" del profesor): \( r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \cdot \sum (y_i - \bar{y})^2}} \).</li>
         <li>Con calculadora: primero el numerador (su <b>signo</b> da el sentido), después cada corchete, multiplicar, <b>la raíz al final</b>. Ojo: \( (\sum X)^2 \) es la suma al cuadrado, no \( \sum X^2 \).</li>
         <li><b>Si da más de 1 o menos de −1, está mal calculado.</b></li>
         <li>El <b>signo</b> solo dice el sentido; la <b>intensidad</b> la da el valor absoluto. Una relación inversa con r = −0,99 es más intensa que una directa con r = 0,5.</li>
@@ -584,8 +545,6 @@
     <div class="card">
       <p class="h-main"><span class="dot"></span>Ojo: errores y diferencias del material de U5</p>
       <ul>
-        <li>Guía TP N°5, ej. 2: el segundo dato dice \( \sum x_{1,i} \cdot y_i = 43740 \); es \( \sum x_{2,i} \cdot y_i \) (precio × habitaciones).</li>
-        <li>El profesor llama "fórmula de trabajo" a la de desvíos y "original" a la de sumatorias con N (en los libros es al revés). Las dos dan lo mismo.</li>
         <li>En una clase dijo "el 93 % del volumen de ventas está explicado"; la forma correcta es "el 93 % de la <b>variación</b> de las ventas".</li>
       </ul>
     </div>
@@ -595,7 +554,7 @@
   <section class="unit reveal" id="u6" style="--accent:var(--u6)">
     <div class="unit-head"><div class="unit-num">06</div>
       <div class="unit-titles"><p class="u-kicker">Unidad 6</p><h2>Análisis de series de tiempo</h2></div></div>
-    <span class="unit-weight">Tendencia · relativos · pronóstico · estacionalidad</span>
+    <span class="unit-weight">Tendencia · relativos · pronóstico</span>
 
     <div class="card">
       <p class="h-main"><span class="dot"></span>Serie de tiempo</p>
@@ -603,48 +562,11 @@
       <p class="def">Matemáticamente: los valores \( Y_1, Y_2, \dots, Y_n \) de una variable Y (ventas, cotización…) en los tiempos \( t_1, t_2, \dots, t_n \). <b>Y es función de t:</b></p>
       <div class="fbox">\[ Y = F(t) \]<small>En el eje horizontal va el tiempo; en el vertical, los valores de la serie</small></div>
       <p class="def">Se representa con un <b>gráfico de líneas</b> (gráfico de evolución): los puntos de cada período unidos en orden.</p>
-      <p class="h-sub">Para qué sirve en Marketing y Dirección de Negocios</p>
-      <ul>
-        <li>Identificar <b>patrones de consumo, tendencias y estacionalidades</b> → adaptar la estrategia de marketing.</li>
-        <li>Hacer <b>pronósticos de ventas</b> → planificar la producción y las campañas promocionales.</li>
-        <li>Detectar <b>riesgos</b> (ciclos económicos, cambios estacionales) y tomar medidas preventivas.</li>
-      </ul>
     </div>
 
     <div class="card">
-      <p class="h-main"><span class="dot"></span>Componentes de una serie <span class="tag">modelo multiplicativo</span></p>
-      <p class="def">La serie observada es el <b>producto</b> de cuatro movimientos característicos (en este curso se usa el producto, no la suma):</p>
-      <div class="fbox">\[ Y = T \cdot E \cdot C \cdot A \]</div>
-      <div class="tbl-scroll">
-      <table class="eco">
-        <thead><tr><th>Componente</th><th>Qué es</th><th>Ejemplo</th></tr></thead>
-        <tbody>
-          <tr><td><b>T · Tendencia</b></td><td>Movimiento a <b>largo plazo</b> (secular): la <b>dirección general</b> de la serie. Se representa con una recta o curva de tendencia.</td><td>Crecimiento sostenido de las ventas</td></tr>
-          <tr><td><b>E · Estacionalidad</b></td><td>Esquemas <b>idénticos o casi idénticos</b> que se repiten en los <b>mismos períodos de años sucesivos</b>, por sucesos recurrentes anuales. También vale para semanas, días u horas.</td><td>Agua envasada en verano · regalos en el Día de la Madre · juguetes en Reyes</td></tr>
-          <tr><td><b>C · Ciclos</b></td><td><b>Oscilaciones alrededor de la tendencia</b>, de duración irregular (varios años). Ligados a la actividad económica general: prosperidad, recesión, depresión y recuperación.</td><td>Ciclo económico de expansión y contracción</td></tr>
-          <tr><td><b>A · Aleatoriedad</b></td><td>Movimientos <b>esporádicos</b> por sucesos de azar. Suelen ser de corta duración y no tienen patrón.</td><td>Sequías, inundaciones, huelgas, elecciones</td></tr>
-        </tbody>
-      </table>
-      </div>
-      <div class="note"><b>Ciclo económico:</b> prosperidad y depresión son los <b>extremos</b> (actividad en su punto más alto o más bajo); recesión y recuperación son las <b>transiciones</b> entre esos extremos.</div>
-      <p class="def" style="margin-top:12px"><b>Análisis de series de tiempo</b> = descomponer la serie: identificar y aislar los factores T, E, C y A para interpretar el pasado y pronosticar el futuro.</p>
-    </div>
-
-    <div class="card">
-      <p class="h-main"><span class="dot"></span>1 · Promedios móviles <span class="tag">suavización</span></p>
-      <p class="def">Un <b>promedio móvil de orden N</b> es la sucesión de medias aritméticas de N valores consecutivos: se suman N períodos, se divide por N y se avanza un período.</p>
-      <div class="fbox">\[ PM_3 = \frac{Y_1 + Y_2 + Y_3}{3} \;,\; \frac{Y_2 + Y_3 + Y_4}{3} \;,\; \dots \]<small>El numerador se llama total móvil · cada promedio se ubica en el período central de los N que promedia</small></div>
-      <ul>
-        <li><b>Para qué sirve:</b> como todo promedio, <b>reduce la variación</b>: elimina las fluctuaciones bruscas (suavización) y deja ver si la serie sube, baja o se mantiene.</li>
-        <li>Con orden 3, el primer y el último período <b>quedan sin promedio</b> (no tienen vecino de un lado).</li>
-        <li>Conviene un orden <b>impar</b> (3, 5, 7) para que el promedio caiga justo en un período y no haya que centrarlo.</li>
-        <li><b>Promedio móvil ponderado:</b> si se usan medias ponderadas con pesos fijados de antemano.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <p class="h-main"><span class="dot"></span>2 · Tendencia por mínimos cuadrados <span class="tag">la que más entra</span></p>
-      <p class="def">Se ajusta una recta igual que en U5, pero la X es el <b>tiempo codificado t</b>. Se usan datos <b>anuales</b> (idealmente 15 o 20 años, para que un ciclo no se confunda con la tendencia).</p>
+      <p class="h-main"><span class="dot"></span>1 · Tendencia por mínimos cuadrados</p>
+      <p class="def">Se ajusta una recta igual que en U5, pero la X es el <b>tiempo codificado t</b>. Se usan datos <b>anuales</b>.</p>
       <div class="fbox">\[ T_t = a + b \cdot t \]<small>Mismas fórmulas de a y b que en regresión, con t en lugar de X (o la da Excel)</small></div>
       <p class="h-sub">La variable tiempo t</p>
       <ul>
@@ -659,12 +581,11 @@
         <div class="mini"><b>b · pendiente</b><br>Cuánto <b>aumenta (b &gt; 0) o disminuye (b &lt; 0) en promedio</b> la tendencia de Y <b>por cada período</b> (por año, por trimestre).</div>
       </div>
       <div class="note"><b>Frase modelo:</b> "b = 12,5: según la tendencia, las ventas aumentan en promedio 12,5 millones de pesos por año." · "a = 48: valor de tendencia estimado para 2014 (t = 0, si t = 1 es 2015), 48 millones de pesos."</div>
-      <div class="note"><b>Ecuación de tendencia ≠ ecuación de regresión</b> (en sentido estricto): Y no es aleatoria sino una serie de valores históricos, hay un solo valor por período, y los períodos contiguos suelen ser dependientes.</div>
     </div>
 
     <div class="card">
-      <p class="h-main"><span class="dot"></span>3 · Relativos cíclicos (datos anuales)</p>
-      <p class="def">Con datos <b>anuales</b> no hay estacionalidad, así que al dividir el dato observado por su valor de tendencia se <b>elimina el efecto de la tendencia</b> y queda la parte cíclica (con lo aleatorio): \( Y / T = C \cdot A \).</p>
+      <p class="h-main"><span class="dot"></span>2 · Relativos cíclicos (datos anuales)</p>
+      <p class="def">Al dividir el dato observado por su valor de tendencia se <b>elimina el efecto de la tendencia</b>: el relativo muestra dónde quedó cada año respecto de ella.</p>
       <div class="fbox">\[ R_t = \frac{Y_t}{T_t} \cdot 100 \]<small>Yt = valor observado · Tt = valor de tendencia de ese mismo año</small></div>
       <div class="tbl-scroll">
       <table class="eco">
@@ -679,47 +600,18 @@
       <div class="note"><b>Frase modelo:</b> "Un relativo de 93,40 indica que ese año las ventas estuvieron un 6,60 % por debajo de lo que indicaba la tendencia; uno de 104,20, un 4,20 % por encima."</div>
       <ul>
         <li>Los relativos se calculan <b>solo para los años observados</b>. En los años pronosticados no hay Yt, así que no corresponde calcular Rt.</li>
-        <li><b>Gráfico de relativos (gráfico de ciclos):</b> años en el eje horizontal, Rt en el vertical, línea unida y una <b>referencia horizontal en 100</b> (la tendencia). Arriba de 100 = por encima de la tendencia; abajo = por debajo; sobre la línea = coincide.</li>
+        <li><b>Gráfico de relativos:</b> años en el eje horizontal, Rt en el vertical, línea unida y una <b>referencia horizontal en 100</b> (la tendencia). Arriba de 100 = por encima de la tendencia; abajo = por debajo; sobre la línea = coincide.</li>
       </ul>
     </div>
 
     <div class="card">
-      <p class="h-main"><span class="dot"></span>4 · Pronóstico con la tendencia</p>
+      <p class="h-main"><span class="dot"></span>3 · Pronóstico con la tendencia</p>
       <p class="def">Se reemplaza en la recta el <b>t del período futuro</b>. Ese valor de tendencia es el pronóstico (con datos anuales).</p>
       <div class="fbox">\[ \hat{Y}_{futuro} = T_{t} = a + b \cdot t_{futuro} \]<small>Ej.: si t = 1 es 2015 y el último observado es 2022 (t = 8) → 2023 es t = 9, 2024 es t = 10</small></div>
       <ul>
         <li>Expresar siempre con <b>unidades</b> (millones de pesos, unidades vendidas…).</li>
         <li>Es una <b>extrapolación</b> (fuera del período observado): supone que la tendencia sigue igual.</li>
         <li><b>Representar la recta</b> en el gráfico de evolución: alcanza con <b>dos puntos</b> (por ejemplo, el primer t y el último pronosticado). Diferenciar los observados de los pronosticados (otro color, línea punteada).</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <p class="h-main"><span class="dot"></span>5 · Estacionalidad: índice estacional (IE)</p>
-      <p class="def"><b>Índice estacional:</b> conjunto de números que muestra el <b>valor relativo de la variable en cada período del año</b> (trimestre, mes). Su promedio debe ser <b>100 %</b>: la suma es 400 con trimestres y 1200 con meses.</p>
-      <p class="h-sub">Método del porcentaje medio (el único que se ve)</p>
-      <ol class="pasos">
-        <li><b>Paso 1)</b> Calcular el <b>promedio de cada año</b> (\( \bar{Y} \) del año).</li>
-        <li><b>Paso 2)</b> Expresar cada dato como <b>% del promedio de su año</b>: \( \frac{Y_i}{\bar{Y}_{a\tilde{n}o}} \cdot 100 \).</li>
-        <li><b>Paso 3)</b> Promediar (media aritmética) los porcentajes del <b>mismo período en los distintos años</b> → ese es el IE de cada trimestre.</li>
-        <li><b>Paso 4)</b> Si los IE no suman 400 (o 1200), <b>ajustarlos</b> multiplicándolos por \( \frac{400}{\sum IE} \).</li>
-      </ol>
-      <div class="note"><b>Cómo se lee:</b> IE &gt; 100 → ese trimestre vende por encima del promedio anual (pico); IE &lt; 100 → por debajo (contracción). "IE = 124,48: en el 1.er trimestre las ventas son un 24,48 % mayores que el promedio del año."</div>
-      <p class="h-sub">Datos desestacionalizados (ajustados a la variación estacional)</p>
-      <div class="fbox">\[ \text{Desestacionalizado} = \frac{Y_i}{IE} \cdot 100 \]<small>Quedan T · C · A: sin el efecto de la estación</small></div>
-      <ul>
-        <li>Sirven para <b>identificar la tendencia</b>, <b>comparar períodos</b> sin que la estación los distorsione y hacer <b>pronósticos más precisos</b> (eliminan el "ruido" estacional).</li>
-      </ul>
-      <p class="h-sub">Pronóstico con tendencia y estacionalidad</p>
-      <div class="fbox">\[ \hat{Y} = T_t \cdot \frac{IE}{100} \]<small>1) proyectar la tendencia con el t del trimestre futuro · 2) multiplicar por el IE de ese trimestre</small></div>
-    </div>
-
-    <div class="card">
-      <p class="h-main"><span class="dot"></span>6 · Ciclos y aleatoriedad</p>
-      <ul>
-        <li><b>Ciclos (C):</b> los más complejos de obtener. A los datos desestacionalizados se los divide por la tendencia (\( Y / (T \cdot E) = C \cdot A \)) y se aplica un <b>promedio móvil corto</b> (3, 5 o 7) para suavizar lo aleatorio: queda C.</li>
-        <li><b>Aleatoriedad (A):</b> se aísla dividiendo \( Y / (T \cdot E \cdot C) \). Suele ser de poca magnitud: <b>pequeñas variaciones muy frecuentes, grandes desviaciones poco frecuentes</b>. No tiene patrón.</li>
-        <li><b>Comparación de datos:</b> cuidado al comparar meses de distinta cantidad de días, años bisiestos o días hábiles distintos (feriados, huelgas). El ajuste queda a criterio del investigador.</li>
       </ul>
     </div>
 
@@ -731,7 +623,7 @@
         <tbody>
           <tr><td>"Interpretá la pendiente y la ordenada de la tendencia"</td><td>b = cambio promedio por año (con signo y unidades) · a = tendencia en t = 0 (decir el año).</td></tr>
           <tr><td>"¿Qué año corresponde a t = 0?"</td><td>El año anterior al que tiene t = 1.</td></tr>
-          <tr><td>"Completá los valores de tendencia / índices temporales"</td><td>Reemplazar cada t en \( T_t = a + bt \).</td></tr>
+          <tr><td>"Completá los valores de tendencia"</td><td>Reemplazar cada t en \( T_t = a + bt \).</td></tr>
           <tr><td>"Completá los relativos"</td><td>\( R_t = Y_t / T_t \cdot 100 \), solo en años observados; redondear a 2 decimales.</td></tr>
           <tr><td>"¿Qué efecto elimina el relativo?"</td><td>El de la <b>tendencia</b>: muestra la posición del dato respecto de ella.</td></tr>
           <tr><td>"Mayor y menor relativo"</td><td>El año más por encima y el más por debajo de la tendencia (decir en qué %).</td></tr>
@@ -747,8 +639,6 @@
     <div class="card">
       <p class="h-main"><span class="dot"></span>Ojo: errores del material de U6</p>
       <ul>
-        <li>Apunte pág. 10: escribe la recta como \( \hat{Y} = 91{,}7 - 3{,}8211\,t \). Es con <b>+</b>: \( \hat{Y} = 91{,}7 + 3{,}8211\,t \) (así figura en la pág. 5 y en el Genially).</li>
-        <li>Apunte pág. 10, tabla del pronóstico 2018: la columna "T" muestra los IE. La tendencia es 183,41 · 187,23 · 191,05 · 194,87 (\( t = 24 \dots 27 \)) y el pronóstico \( T \cdot IE/100 \) = 228,31 · 137,87 · 166,77 · 223,30.</li>
         <li>La guía se titula "Trabajo Práctico N°5" pero es la de <b>Series de tiempo (U6)</b>.</li>
       </ul>
     </div>
@@ -763,7 +653,6 @@
     <div class="fgrid" style="--accent:var(--u4)">
       <div class="fcard"><span class="lbl">Media (agrupados)</span><div class="f">\[ \bar{x} = \frac{\sum f_i \cdot x_i}{N} \]</div><div class="d">En DAIC xi es la marca de clase.</div></div>
       <div class="fcard"><span class="lbl">Desvío</span><div class="f">\[ d = x_i - \bar{x} \qquad \sum d \cdot f_i = 0 \]</div><div class="d">Negativo = debajo de la media.</div></div>
-      <div class="fcard"><span class="lbl">Rango · Rango intercuartílico</span><div class="f">\[ R = x_{\max} - x_{\min} \qquad RQ = Q_3 - Q_1 \]</div><div class="d">RQ: amplitud del 50 % central.</div></div>
       <div class="fcard"><span class="lbl">Desvío medio</span><div class="f">\[ DM = \frac{\sum |x_i - \bar{x}| \cdot f_i}{N} \]</div><div class="d">Unidad de la variable.</div></div>
       <div class="fcard"><span class="lbl">Varianza</span><div class="f">\[ S^2 = \frac{\sum (x_i - \bar{x})^2 \cdot f_i}{N} \]</div><div class="d">Divisor N · unidad al cuadrado.</div></div>
       <div class="fcard"><span class="lbl">Desvío estándar</span><div class="f">\[ S = \sqrt{S^2} \]</div><div class="d">Unidad de la variable.</div></div>
@@ -777,16 +666,12 @@
       <div class="fcard"><span class="lbl">Ordenada al origen</span><div class="f">\[ a = \bar{y} - b \cdot \bar{x} \]</div><div class="d">Y estimado con X = 0 (¿está en el rango?).</div></div>
       <div class="fcard"><span class="lbl">Correlación de Pearson</span><div class="f">\[ r = \frac{N \sum XY - \sum X \sum Y}{\sqrt{[N \sum X^2 - (\sum X)^2][N \sum Y^2 - (\sum Y)^2]}} \]</div><div class="d">−1 ≤ r ≤ 1 · intensidad por |r|.</div></div>
       <div class="fcard"><span class="lbl">Determinación</span><div class="f">\[ R^2 = r^2 \cdot 100 \]</div><div class="d">% de la variación de Y explicada por X.</div></div>
-      <div class="fcard"><span class="lbl">Error estimado</span><div class="f">\[ e_i = y_i - \hat{y}_i \]</div><div class="d">MCO: \( \sum e_i^2 \) mínima.</div></div>
     </div>
     <p class="h-sub" style="color:var(--u6);text-decoration-color:var(--u6)">U6 · Series de tiempo</p>
     <div class="fgrid">
-      <div class="fcard"><span class="lbl">Modelo multiplicativo</span><div class="f">\[ Y = T \cdot E \cdot C \cdot A \]</div><div class="d">Tendencia · estacionalidad · ciclos · aleatoriedad.</div></div>
       <div class="fcard"><span class="lbl">Tendencia</span><div class="f">\[ T_t = a + b \cdot t \]</div><div class="d">b = cambio por período · a = valor en t = 0.</div></div>
       <div class="fcard"><span class="lbl">Relativo cíclico</span><div class="f">\[ R_t = \frac{Y_t}{T_t} \cdot 100 \]</div><div class="d">Elimina la tendencia · &gt; 100 arriba, &lt; 100 abajo.</div></div>
-      <div class="fcard"><span class="lbl">Promedio móvil de orden 3</span><div class="f">\[ PM_3 = \frac{Y_{t-1} + Y_t + Y_{t+1}}{3} \]</div><div class="d">Suaviza; se ubica en el período central.</div></div>
-      <div class="fcard"><span class="lbl">Desestacionalizar</span><div class="f">\[ \frac{Y_i}{IE} \cdot 100 \]</div><div class="d">IE promedio 100 · suman 400 (trimestres).</div></div>
-      <div class="fcard"><span class="lbl">Pronóstico</span><div class="f">\[ \hat{Y} = T_t \quad \text{(anual)} \qquad \hat{Y} = T_t \cdot \frac{IE}{100} \quad \text{(trimestral)} \]</div><div class="d">t = siguiente al último observado.</div></div>
+      <div class="fcard"><span class="lbl">Pronóstico</span><div class="f">\[ \hat{Y} = T_t = a + b \cdot t_{futuro} \]</div><div class="d">t = siguiente al último observado.</div></div>
     </div>
   </section>
 
@@ -817,7 +702,7 @@
 <script>
   /* ============ AUTO-ACTUALIZADOR ============ */
   /* Bump BUILD en cada deploy: las pestañas abiertas detectan la versión nueva y recargan solas. */
-  const BUILD='2026-11-13-1';
+  const BUILD='2026-11-15-1';
   async function checkUpdate(){
     try{
       if(location.protocol==='file:')return;
@@ -849,13 +734,11 @@
   const EC=[
    {u:'U4 · Dispersión: conceptos',c:'var(--u4)',items:[
      {q:'¿Qué miden las medidas de dispersión?',a:'Qué tan dispersos o concentrados están los datos con respecto a la media aritmética (cuán homogéneos son).'},
-     {q:'¿Cuáles son las medidas de dispersión absolutas?',a:'Rango, rango intercuartílico, desvío medio, varianza y desvío estándar.'},
+     {q:'¿Cuáles son las medidas de dispersión absolutas?',a:'Desvío medio, varianza y desvío estándar.'},
      {q:'¿Cuál es la única medida de dispersión relativa y por qué es relativa?',a:'El coeficiente de variación: se expresa en porcentaje (no tiene unidad), por eso permite comparar distribuciones distintas.'},
      {q:'¿Qué medida usa el profesor "por excelencia" y para qué?',a:'El coeficiente de variación: da un porcentaje de variabilidad y permite comparar entre distintas poblaciones.'},
      {q:'¿Qué es un desvío?',a:'La diferencia entre un valor y la media: d = xi − x̄. Negativo si el dato está por debajo de la media, positivo si está por encima.'},
-     {q:'¿Cuánto da la suma de los desvíos (por su frecuencia)?',a:'Cero (o casi cero por redondeo). Por eso se usan valores absolutos o cuadrados. Si da lejos de 0, la media está mal.'},
-     {q:'¿Qué indica el rango y cuál es su principal desventaja?',a:'La distancia entre el valor máximo y el mínimo. Usa solo dos datos y es muy sensible a los extremos.'},
-     {q:'¿Qué indica el rango intercuartílico?',a:'RQ = Q3 − Q1: la amplitud del intervalo donde cae el 50 % central de los datos. No le afectan los extremos.'}
+     {q:'¿Cuánto da la suma de los desvíos (por su frecuencia)?',a:'Cero (o casi cero por redondeo). Por eso se usan valores absolutos o cuadrados. Si da lejos de 0, la media está mal.'}
    ]},
    {u:'U4 · Desvío medio, varianza, desvío, CV',c:'var(--u4)',items:[
      {q:'¿Qué es el desvío medio y en qué unidad se expresa?',a:'El promedio de los desvíos en valor absoluto respecto de la media. En la misma unidad que la variable.'},
@@ -880,14 +763,12 @@
      {q:'¿Cómo se ordenan las medidas con asimetría negativa (a la izquierda)?',a:'Media < mediana < moda: la cola está a la izquierda.'},
      {q:'Fórmulas de la asimetría absoluta y relativa',a:'\\( A_a = \\bar{x} - Mo \\) · \\( A_r = \\dfrac{A_a}{S} \\) (coeficiente de Pearson).'},
      {q:'¿Qué indica el signo de Aa o Ar?',a:'≈ 0 simétrica · positivo: asimetría positiva (a la derecha) · negativo: asimetría negativa (a la izquierda).'},
-     {q:'¿Para qué sirve la asimetría relativa Ar y no solo Aa?',a:'Ar no tiene unidad (está medida en desvíos estándar): permite comparar la asimetría de distribuciones de distinta escala.'},
-     {q:'¿Qué medida de posición es más representativa en una distribución asimétrica?',a:'La mediana, porque no la afectan los valores extremos.'}
+     {q:'¿Para qué sirve la asimetría relativa Ar y no solo Aa?',a:'Ar no tiene unidad (está medida en desvíos estándar): permite comparar la asimetría de distribuciones de distinta escala.'}
    ]},
    {u:'U5 · Relación y diagrama',c:'var(--u5)',items:[
      {q:'¿Qué tres aspectos se consideran en la relación entre dos variables?',a:'Existencia (¿hay relación?), forma (¿cómo se da?) e intensidad o fuerza (¿qué tan fuerte es?).'},
      {q:'¿Cómo se llama la variable X y en qué eje va?',a:'Independiente o explicativa. Eje horizontal.'},
      {q:'¿Cómo se llama la variable Y y en qué eje va?',a:'Dependiente o explicada. Eje vertical.'},
-     {q:'¿Qué diferencia hay entre análisis de regresión y de correlación?',a:'Regresión: encontrar el modelo matemático (la recta) para estimar Y a partir de X; supone causalidad. Correlación: medir la intensidad de la relación lineal; no supone causalidad.'},
      {q:'¿Qué es un diagrama de dispersión?',a:'La representación gráfica de los pares ordenados (x; y). Permite ver si hay relación, su forma y su intensidad.'},
      {q:'¿Por dónde se empieza siempre un análisis de correlación?',a:'Por el diagrama de dispersión.'},
      {q:'¿Qué elementos no pueden faltar en el diagrama hecho a mano?',a:'Ejes con escala, rótulo de cada eje con la variable y su unidad, y título "[Y] en función de [X]".'},
@@ -897,8 +778,6 @@
    ]},
    {u:'U5 · Recta de regresión',c:'var(--u5)',items:[
      {q:'Ecuación de la recta de regresión',a:'\\( \\hat{y} = a + b \\cdot x \\) — el sombrero indica valor estimado.'},
-     {q:'¿Qué es el error estimado?',a:'La diferencia entre el valor observado y el estimado por la recta: \\( e_i = y_i - \\hat{y}_i \\).'},
-     {q:'¿Qué hace el método de mínimos cuadrados?',a:'Elige a y b de modo que la suma de los errores al cuadrado sea mínima.'},
      {q:'Fórmula de la pendiente b con sumatorias',a:'\\( b = \\dfrac{N \\sum XY - \\sum X \\sum Y}{N \\sum X^2 - (\\sum X)^2} \\)'},
      {q:'Fórmula de la ordenada al origen a',a:'\\( a = \\bar{y} - b \\cdot \\bar{x} \\)'},
      {q:'¿Por qué punto pasa siempre la recta de regresión?',a:'Por el punto de las medias \\( (\\bar{x}; \\bar{y}) \\).'},
@@ -924,16 +803,9 @@
      {q:'¿Qué es extrapolar y qué precaución requiere?',a:'Estimar Y para un x fuera del rango observado. Pierde precisión al alejarse y supone que la relación sigue igual: hay que tomarlo con precaución.'},
      {q:'Si X está en millones de pesos, ¿qué valor reemplazás para $4.500.000?',a:'x = 4,5. Y al responder, volver a la unidad de Y (ej.: cientos de unidades → multiplicar por 100).'}
    ]},
-   {u:'U6 · Series y componentes',c:'var(--u6)',items:[
+   {u:'U6 · Serie de tiempo',c:'var(--u6)',items:[
      {q:'¿Qué es una serie de tiempo?',a:'Un conjunto de observaciones tomadas en instantes específicos, generalmente a intervalos iguales. Y = F(t).'},
-     {q:'¿Con qué gráfico se representa una serie de tiempo?',a:'Con un gráfico de líneas (de evolución): tiempo en el eje horizontal, valores en el vertical.'},
-     {q:'¿Cuál es el modelo de componentes que se usa en el curso?',a:'El multiplicativo: Y = T · E · C · A.'},
-     {q:'¿Qué es la tendencia (T)?',a:'El movimiento a largo plazo: la dirección general de la serie. Se representa con una recta o curva.'},
-     {q:'¿Qué es la estacionalidad (E)?',a:'Esquemas idénticos o casi idénticos que se repiten en los mismos períodos de años sucesivos (Navidad, verano, Día de la Madre).'},
-     {q:'¿Qué son los ciclos (C)?',a:'Oscilaciones alrededor de la tendencia, de duración irregular (varios años): prosperidad, recesión, depresión y recuperación.'},
-     {q:'¿Qué es la aleatoriedad (A)?',a:'Movimientos esporádicos por sucesos de azar (sequías, huelgas, elecciones). No tienen patrón.'},
-     {q:'¿Para qué sirve un promedio móvil?',a:'Para suavizar la serie: reduce la variación y elimina fluctuaciones bruscas, así se ve si sube, baja o se mantiene.'},
-     {q:'¿Dónde se ubica un promedio móvil de orden 3?',a:'En el período central de los tres que promedia (el primero y el último quedan sin valor).'}
+     {q:'¿Con qué gráfico se representa una serie de tiempo?',a:'Con un gráfico de líneas (de evolución): tiempo en el eje horizontal, valores en el vertical.'}
    ]},
    {u:'U6 · Tendencia, relativos y pronóstico',c:'var(--u6)',items:[
      {q:'¿Con qué método se estima la tendencia?',a:'Con mínimos cuadrados: Tt = a + b·t, usando el tiempo codificado t como variable X.'},
@@ -946,11 +818,7 @@
      {q:'¿Qué significa Rt = 100? ¿Quiere decir que no hubo cambios respecto del año anterior?',a:'Que el valor observado coincide con la tendencia. No: Rt compara con la tendencia, no con el año anterior.'},
      {q:'¿Se calculan relativos para los años pronosticados?',a:'No: no hay valor observado Yt, solo la tendencia.'},
      {q:'¿Cómo se pronostica con la recta de tendencia?',a:'Se reemplaza en Tt = a + b·t el t del año futuro (el siguiente al último observado) y se da el resultado con unidades.'},
-     {q:'¿Cómo se construye el gráfico de relativos?',a:'Rt de cada año observado unidos por una línea, con una referencia horizontal en 100: arriba = por encima de la tendencia, abajo = por debajo.'},
-     {q:'¿Qué es el índice estacional y cuánto deben sumar los trimestrales?',a:'Los valores relativos de la variable en cada período del año; promedian 100 %, así que suman 400 (1200 con meses).'},
-     {q:'¿Cómo se calcula el índice estacional por el método del porcentaje medio?',a:'Cada dato como % del promedio de su año; se promedian los % del mismo trimestre en los distintos años; si no suman 400, se ajustan.'},
-     {q:'¿Cómo se desestacionaliza un dato y para qué sirve?',a:'Dividiéndolo por su IE (·100). Sirve para ver la tendencia, comparar períodos sin el efecto de la estación y pronosticar mejor.'},
-     {q:'¿Cómo se pronostica un trimestre con tendencia y estacionalidad?',a:'Se proyecta la tendencia con el t del trimestre futuro y se multiplica por su índice estacional (IE/100).'}
+     {q:'¿Cómo se construye el gráfico de relativos?',a:'Rt de cada año observado unidos por una línea, con una referencia horizontal en 100: arriba = por encima de la tendencia, abajo = por debajo.'}
    ]}
   ];
   const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
