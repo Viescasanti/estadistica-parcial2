@@ -653,6 +653,7 @@
     <div class="fgrid" style="--accent:var(--u4)">
       <div class="fcard"><span class="lbl">Media (agrupados)</span><div class="f">\[ \bar{x} = \frac{\sum f_i \cdot x_i}{N} \]</div><div class="d">En DAIC xi es la marca de clase.</div></div>
       <div class="fcard"><span class="lbl">Desvío</span><div class="f">\[ d = x_i - \bar{x} \qquad \sum d \cdot f_i = 0 \]</div><div class="d">Negativo = debajo de la media.</div></div>
+      <div class="fcard"><span class="lbl">Rango · Rango intercuartílico</span><div class="f">\[ R = x_{\max} - x_{\min} \qquad RQ = Q_3 - Q_1 \]</div><div class="d">RQ: amplitud del 50 % central.</div></div>
       <div class="fcard"><span class="lbl">Desvío medio</span><div class="f">\[ DM = \frac{\sum |x_i - \bar{x}| \cdot f_i}{N} \]</div><div class="d">Unidad de la variable.</div></div>
       <div class="fcard"><span class="lbl">Varianza</span><div class="f">\[ S^2 = \frac{\sum (x_i - \bar{x})^2 \cdot f_i}{N} \]</div><div class="d">Divisor N · unidad al cuadrado.</div></div>
       <div class="fcard"><span class="lbl">Desvío estándar</span><div class="f">\[ S = \sqrt{S^2} \]</div><div class="d">Unidad de la variable.</div></div>
@@ -702,7 +703,7 @@
 <script>
   /* ============ AUTO-ACTUALIZADOR ============ */
   /* Bump BUILD en cada deploy: las pestañas abiertas detectan la versión nueva y recargan solas. */
-  const BUILD='2026-11-15-1';
+  const BUILD='2026-11-15-2';
   async function checkUpdate(){
     try{
       if(location.protocol==='file:')return;
