@@ -170,6 +170,35 @@
   .btn:hover{filter:brightness(1.25)}
   .btn.ghost{background:transparent;color:var(--ink-soft);box-shadow:inset 0 0 0 1.5px var(--line)}
   .btn.ghost:hover{color:var(--ink)}
+  /* ---- PASO A PASO ---- */
+  .pwrap{max-width:860px;margin:46px auto 0}
+  .ptab-wrap{overflow-x:auto;background:var(--paper-2);border:1.5px solid var(--line);border-radius:14px;padding:14px}
+  table.ptab{width:100%;border-collapse:collapse;font-size:16px}
+  table.ptab th{background:var(--u4);color:#fff;padding:9px 6px;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;text-align:center;white-space:nowrap;transition:background .3s,color .3s}
+  table.ptab th.off{background:var(--paper);color:transparent}
+  table.ptab td{padding:10px 6px;text-align:center;border-bottom:1px solid var(--line);background:#fff;font-family:"JetBrains Mono",monospace;font-weight:700;font-variant-numeric:tabular-nums;min-width:52px}
+  table.ptab td.lbl{font-weight:600;color:var(--ink-soft)}
+  table.ptab td.off{color:transparent;background:var(--paper)}
+  table.ptab td.cur{background:#f6e7b8;animation:ppop .4s ease-out}
+  table.ptab td.ex{background:var(--gold);color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+  table.ptab td.hl{background:#f6e7b8;box-shadow:inset 0 0 0 2px var(--gold)}
+  table.ptab tr.tot td{border-top:2px solid var(--ink);font-weight:800}
+  @keyframes ppop{from{transform:scale(1.18)}to{transform:scale(1)}}
+  .pstep{margin-top:18px}
+  .pstep .qgroup{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--u4);font-weight:700}
+  .pstep h3{font-family:"Fraunces",serif;font-weight:600;font-size:23px;line-height:1.22;margin:8px 0 12px}
+  .pstep p{margin:8px 0}
+  .pstep ul.calc{list-style:none;padding:0;margin:10px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px}
+  .pstep ul.calc li{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;font-size:15px}
+  .pstep ul.calc li{padding-left:12px}
+  .pstep ul.calc li::before{content:none}
+  .pstep .ok{color:var(--green);font-weight:700}
+  .pnav{display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap}
+  .pnav .btn:disabled{opacity:.35;cursor:default;filter:none}
+  .pdots{display:flex;gap:5px;flex-wrap:wrap;margin-left:auto}
+  .pdots i{width:9px;height:9px;border-radius:50%;background:var(--line);display:block}
+  .pdots i.on{background:var(--u4)}
+  @media(max-width:720px){.modes button{padding:6px 9px;font-size:11px}.nav-brand{display:none}.ptab-wrap{padding:8px}table.ptab{font-size:14px}table.ptab td{padding:8px 3px;min-width:0}table.ptab th{padding:8px 3px;font-size:10px}.pstep h3{font-size:20px}}
   .fb{font-family:"JetBrains Mono",monospace;font-size:13px;margin:14px 0 2px;min-height:18px}
   .fb.ok{color:var(--ok)}.fb.no{color:var(--no)}
   .esc-input{width:100%;min-height:130px;resize:vertical;background:var(--paper);border:1.5px solid var(--line);border-radius:12px;color:var(--ink);font-family:"Atkinson Hyperlegible",sans-serif;font-size:17px;line-height:1.55;padding:14px 16px;margin-bottom:14px}
@@ -203,6 +232,7 @@
       <button data-mode="resumen" class="active">Resumen</button>
       <button data-mode="quiz">Quiz</button>
       <button data-mode="escribir">Escribir</button>
+      <button data-mode="paso">Paso a paso</button>
     </div>
   </div>
   <div class="nav-chips" id="navchips">
@@ -694,6 +724,22 @@
     </div>
   </section>
 
+  <!-- ===================== PASO A PASO ===================== -->
+  <section id="view-paso" class="modeview hidden">
+    <div class="pwrap">
+      <p class="u-kicker" style="color:var(--u4)">U4 · Ejercicio 1 del modelo</p>
+      <p class="def">Tabla auxiliar paso a paso: cada click agrega a la tabla lo que se calcula en ese momento. Podés avanzar con el botón o con las flechas del teclado.</p>
+      <div class="ptab-wrap"><table class="ptab" id="ptab"></table></div>
+      <div class="pstep card" id="pstep"></div>
+      <div class="pnav">
+        <button class="btn ghost" id="p-prev">← Anterior</button>
+        <button class="btn" id="p-next">Siguiente →</button>
+        <button class="btn ghost" id="p-reset">Reiniciar</button>
+        <div class="pdots" id="pdots"></div>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <p>U4 · U5 · U6 · Estadística Aplicada a los Negocios</p>
   </footer>
@@ -703,7 +749,7 @@
 <script>
   /* ============ AUTO-ACTUALIZADOR ============ */
   /* Bump BUILD en cada deploy: las pestañas abiertas detectan la versión nueva y recargan solas. */
-  const BUILD='2026-11-15-2';
+  const BUILD='2026-11-15-3';
   async function checkUpdate(){
     try{
       if(location.protocol==='file:')return;
@@ -894,8 +940,81 @@
     document.getElementById('e-again').onclick=buildEsc;
   }
 
+  /* ---- PASO A PASO ---- */
+  const P_INT=['[5;15)','[15;25)','[25;35)','[35;45)'],P_FI=[2,5,8,5],P_XI=[10,20,30,40],P_MED=28;
+  const P_HEAD=['Intervalo','fi','xi','fi·xi','d','fi·|d|','fi·d²'];
+  const pf=n=>(n<0?'−':'')+Math.abs(n);
+  const P_D=P_XI.map(x=>x-P_MED),P_FX=P_FI.map((f,i)=>f*P_XI[i]),P_FA=P_FI.map((f,i)=>f*Math.abs(P_D[i])),P_FD=P_FI.map((f,i)=>f*P_D[i]*P_D[i]);
+  const P_VAL={1:P_FI,2:P_XI,3:P_FX,4:P_D,5:P_FA,6:P_FD};
+  const P_TOT={1:'20',2:'—',3:'560',4:'—',5:'152',6:'1720'};
+  const pcol=(c,rows)=>rows.map(r=>[c,r]);
+  const pli=a=>'<ul class="calc">'+a.map(x=>'<li>'+x+'</li>').join('')+'</ul>';
+  const R=String.raw;
+  const P_FR=[
+   {t:'Los datos del ejercicio',add:pcol(1,[0,1,2,3,4]),
+    h:R`<p>Tiempo de preparación de <b>20 pedidos</b>, agrupados en intervalos (DAIC). \( N = \sum f_i = 20 \) y la media es \( \bar{x} = 28 \) min (te la dan en el enunciado).</p><p>Vamos a completar la tabla auxiliar <b>columna por columna</b>.</p>`},
+   {t:'Marca de clase xi · un ejemplo',add:pcol(2,[1]),ex:1,
+    h:R`<p>En datos agrupados, \( x_i \) es la <b>marca de clase</b>: el punto medio del intervalo.</p><p>\( x_i = \dfrac{L_i + L_s}{2} \) → para \( [15;25) \): \( x_i = \dfrac{15 + 25}{2} = \mathbf{20} \)</p>`},
+   {t:'Marca de clase xi · el resto de la columna',add:pcol(2,[0,2,3,4]),
+    h:pli([R`\( [5;15) \): \( \frac{5+15}{2} = 10 \)`,R`\( [25;35) \): \( \frac{25+35}{2} = 30 \)`,R`\( [35;45) \): \( \frac{35+45}{2} = 40 \)`])+R`<p>La columna \( x_i \) no se suma en la fila total.</p>`},
+   {t:'fi · xi · un ejemplo',add:pcol(3,[2]),ex:1,
+    h:R`<p>Sirve para <b>calcular o comprobar la media</b>.</p><p>Para \( [25;35) \) con \( f_i = 8 \): \( 8 \cdot 30 = \mathbf{240} \)</p>`},
+   {t:'fi · xi · el resto, la suma y la comprobación de la media',add:pcol(3,[0,1,3,4]),
+    h:pli([R`\( 2 \cdot 10 = 20 \)`,R`\( 5 \cdot 20 = 100 \)`,R`\( 5 \cdot 40 = 200 \)`])+R`<p>\( \sum f_i x_i = 20 + 100 + 240 + 200 = \mathbf{560} \)</p><p>Comprobación: \( \bar{x} = \dfrac{560}{20} = 28 \) min <span class="ok">✓ coincide con la media dada</span>.</p>`},
+   {t:'Desvío d · un ejemplo',add:pcol(4,[1]),ex:1,
+    h:R`<p>El <b>desvío</b> es cuánto se aleja cada marca de clase de la media, <b>con signo</b>: \( d = x_i - \bar{x} \).</p><p>Para \( [15;25) \): \( d = 20 - 28 = \mathbf{-8} \)</p><p>Ojo: se usa la <b>marca de clase</b>, no la frecuencia.</p>`},
+   {t:'Desvío d · el resto de la columna',add:pcol(4,[0,2,3]),
+    h:pli([R`\( 10 - 28 = -18 \)`,R`\( 30 - 28 = 2 \)`,R`\( 40 - 28 = 12 \)`])+R`<p>Negativo = por debajo de la media · positivo = por encima.</p>`},
+   {t:'fi · |d| · un ejemplo',add:pcol(5,[2]),ex:1,
+    h:R`<p>El desvío en <b>valor absoluto</b> por su frecuencia.</p><p>Para \( [25;35) \) con \( d = 2 \): \( 8 \cdot |2| = \mathbf{16} \)</p>`},
+   {t:'fi · |d| · el resto y la suma',add:pcol(5,[0,1,3,4]),
+    h:pli([R`\( 2 \cdot |-18| = 36 \)`,R`\( 5 \cdot |-8| = 40 \)`,R`\( 5 \cdot |12| = 60 \)`])+R`<p>\( \sum f_i |d| = 36 + 40 + 16 + 60 = \mathbf{152} \)</p><p>Esta suma es el numerador del desvío medio.</p>`},
+   {t:'fi · d² · un ejemplo',add:pcol(6,[1]),ex:1,
+    h:R`<p>Primero se eleva \( d \) al cuadrado y <b>después</b> se multiplica por \( f_i \).</p><p>Para \( [15;25) \) con \( f_i = 5 \) y \( d = -8 \): \( 5 \cdot (-8)^2 = 5 \cdot 64 = \mathbf{320} \)</p>`},
+   {t:'fi · d² · el resto y la suma',add:pcol(6,[0,2,3,4]),
+    h:pli([R`\( 2 \cdot (-18)^2 = 2 \cdot 324 = 648 \)`,R`\( 8 \cdot 2^2 = 8 \cdot 4 = 32 \)`,R`\( 5 \cdot 12^2 = 5 \cdot 144 = 720 \)`])+R`<p>\( \sum f_i d^2 = 648 + 320 + 32 + 720 = \mathbf{1720} \)</p><p>Esta suma es el numerador de la varianza.</p>`},
+   {t:'Verificación 1 · la suma de los desvíos',add:[],hl:[...pcol(4,[0,1,2,3]),...pcol(1,[0,1,2,3])],
+    h:R`<p>Se tiene que cumplir \( \sum d \cdot f_i = 0 \):</p><p>\( 2 \cdot (-18) + 5 \cdot (-8) + 8 \cdot 2 + 5 \cdot 12 = -36 - 40 + 16 + 60 = \mathbf{0} \) <span class="ok">✓</span></p><p>Si da muy lejos de 0, la media o los desvíos están mal.</p>`},
+   {t:'Verificación 2 · fi · d² nunca es negativo',add:[],hl:pcol(6,[0,1,2,3]),
+    h:R`<p>Un cuadrado no puede dar negativo: 648, 320, 32 y 720 son todos positivos <span class="ok">✓</span>. Si alguno diera negativo, hay un error.</p>`},
+   {t:'Verificación 3 · la columna d no se suma',add:[[4,4]],ex:1,
+    h:R`<p>En la fila total la columna \( d \) queda en blanco (—): sus valores se compensan, no se suma.</p><p><b>Tabla completa.</b> Con los totales \( \sum f_i|d| = 152 \) y \( \sum f_i d^2 = 1720 \) se calculan después DM, varianza, desvío estándar y CV.</p>`}
+  ];
+  let pi=0;
+  function renderPaso(){
+    const seen=new Set(),cur=new Set(),ex=new Set(),hl=new Set(),key=(c,r)=>c+'_'+r;
+    P_FR.forEach((f,i)=>{if(i>pi)return;(f.add||[]).forEach(([c,r])=>{seen.add(key(c,r));if(i===pi){cur.add(key(c,r));if(f.ex)ex.add(key(c,r));}});if(i===pi)(f.hl||[]).forEach(([c,r])=>hl.add(key(c,r)));});
+    const colOn=c=>c===0||[0,1,2,3,4].some(r=>seen.has(key(c,r)));
+    let h='<thead><tr>'+P_HEAD.map((t,c)=>'<th class="'+(colOn(c)?'':'off')+'">'+t+'</th>').join('')+'</tr></thead><tbody>';
+    for(let r=0;r<5;r++){
+      h+='<tr'+(r===4?' class="tot"':'')+'><td class="lbl">'+(r===4?'Total':P_INT[r])+'</td>';
+      for(let c=1;c<7;c++){
+        const k=key(c,r),on=seen.has(k);
+        const v=r===4?P_TOT[c]:pf(P_VAL[c][r]);
+        h+='<td class="'+(on?'':'off')+(cur.has(k)?' cur':'')+(ex.has(k)?' ex':'')+(hl.has(k)?' hl':'')+'">'+v+'</td>';
+      }
+      h+='</tr>';
+    }
+    document.getElementById('ptab').innerHTML=h+'</tbody>';
+    const f=P_FR[pi];
+    const st=document.getElementById('pstep');
+    st.innerHTML='<span class="qgroup">Paso '+(pi+1)+' / '+P_FR.length+'</span><h3>'+f.t+'</h3>'+f.h;
+    typeset(st);
+    document.getElementById('p-prev').disabled=pi===0;
+    document.getElementById('p-next').disabled=pi===P_FR.length-1;
+    document.getElementById('pdots').innerHTML=P_FR.map((_,i)=>'<i class="'+(i<=pi?'on':'')+'"></i>').join('');
+  }
+  document.getElementById('p-next').addEventListener('click',()=>{if(pi<P_FR.length-1){pi++;renderPaso();}});
+  document.getElementById('p-prev').addEventListener('click',()=>{if(pi>0){pi--;renderPaso();}});
+  document.getElementById('p-reset').addEventListener('click',()=>{pi=0;renderPaso();});
+  document.addEventListener('keydown',e=>{
+    if(document.getElementById('view-paso').classList.contains('hidden'))return;
+    if(e.key==='ArrowRight'){document.getElementById('p-next').click();}
+    if(e.key==='ArrowLeft'){document.getElementById('p-prev').click();}
+  });
+
   /* ---- NAVEGACIÓN DE MODOS ---- */
-  const views={resumen:document.getElementById('view-resumen'),quiz:document.getElementById('view-quiz'),escribir:document.getElementById('view-escribir')};
+  const views={resumen:document.getElementById('view-resumen'),quiz:document.getElementById('view-quiz'),escribir:document.getElementById('view-escribir'),paso:document.getElementById('view-paso')};
   document.getElementById('modes').addEventListener('click',e=>{
     const b=e.target.closest('button');if(!b)return;
     document.querySelectorAll('#modes button').forEach(x=>x.classList.remove('active'));
@@ -905,6 +1024,7 @@
     document.getElementById('navchips').classList.toggle('hidden',m!=='resumen');
     if(m==='quiz'&&!quiz.length)buildQuiz();
     if(m==='escribir'&&!esc.length)buildEsc();
+    if(m==='paso')renderPaso();
     window.scrollTo({top:0,behavior:'smooth'});
   });
   document.getElementById('q-restart').addEventListener('click',buildQuiz);
