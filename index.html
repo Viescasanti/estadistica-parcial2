@@ -699,6 +699,7 @@
     <span class="unit-weight">Para repasar antes de entrar</span>
     <p class="h-sub" style="--accent:var(--u4);color:var(--u4);text-decoration-color:var(--u4)">U4 · Dispersión y asimetría</p>
     <div class="fgrid" style="--accent:var(--u4)">
+      <div class="fcard"><span class="lbl">Columnas de la tabla auxiliar (DAIC)</span><div class="f">\[ x_i = \frac{L_i + L_s}{2} \qquad f_i = \text{cantidad de datos del intervalo} \]\[ f_i \cdot x_i \qquad d = x_i - \bar{x} \qquad f_i \cdot |d| \qquad f_i \cdot d^2 \]</div><div class="d"><b>xi</b>: marca de clase (punto medio; en discreta es el mismo valor). <b>fi</b>: dato de la tabla (la suma da N). <b>fi·xi</b>: multiplicar fila a fila; su suma sirve para la media. <b>d</b>: xi menos la media (con su signo). <b>fi·|d|</b>: valor absoluto de d por fi; su suma sirve para el DM. <b>fi·d²</b>: d al cuadrado por fi; su suma sirve para la varianza. Control: \( \sum f_i \cdot d \approx 0 \).</div></div>
       <div class="fcard"><span class="lbl">Media (agrupados)</span><div class="f">\[ \bar{x} = \frac{\sum f_i \cdot x_i}{N} \]</div><div class="d">En DAIC xi es la marca de clase.</div></div>
       <div class="fcard"><span class="lbl">Desvío</span><div class="f">\[ d = x_i - \bar{x} \qquad \sum d \cdot f_i = 0 \]</div><div class="d">Negativo = debajo de la media.</div></div>
       <div class="fcard"><span class="lbl">Rango · Rango intercuartílico</span><div class="f">\[ R = x_{\max} - x_{\min} \qquad RQ = Q_3 - Q_1 \]</div><div class="d">RQ: amplitud del 50 % central.</div></div>
@@ -772,7 +773,7 @@
 <script>
   /* ============ AUTO-ACTUALIZADOR ============ */
   /* Bump BUILD en cada deploy: las pestañas abiertas detectan la versión nueva y recargan solas. */
-  const BUILD='2026-11-16-5';
+  const BUILD='2026-11-16-6';
   async function checkUpdate(){
     try{
       if(location.protocol==='file:')return;
