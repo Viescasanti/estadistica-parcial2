@@ -185,6 +185,8 @@
   table.ptab tr.tot td{border-top:2px solid var(--ink);font-weight:800}
   @keyframes ppop{from{transform:scale(1.18)}to{transform:scale(1)}}
   .pstep{margin-top:18px}
+  .psel{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  table.ptab.lg td.lbl{text-align:left;padding-left:12px}
   .pstep .qgroup{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--u4);font-weight:700}
   .pstep h3{font-family:"Fraunces",serif;font-weight:600;font-size:23px;line-height:1.22;margin:8px 0 12px}
   .pstep p{margin:8px 0}
@@ -727,9 +729,11 @@
   <!-- ===================== PASO A PASO ===================== -->
   <section id="view-paso" class="modeview hidden">
     <div class="pwrap">
-      <p class="u-kicker" style="color:var(--u4)">U4 · Ejercicio 1 del modelo</p>
+      <div class="psel"><button class="btn" id="p-ex1">U4 · Tabla auxiliar</button><button class="btn ghost" id="p-ex2">U5 · r y R²</button></div>
+      <p class="u-kicker" id="pkick" style="color:var(--u4)">U4 · Ejercicio 1 del modelo</p>
       <p class="def">Tabla auxiliar paso a paso: cada click agrega a la tabla lo que se calcula en ese momento. Podés avanzar con el botón o con las flechas del teclado.</p>
-      <div class="ptab-wrap"><table class="ptab" id="ptab"></table></div>
+      <div class="ptab-wrap" id="pw1"><table class="ptab" id="ptab"></table></div>
+      <div class="ptab-wrap" id="pw2" style="display:none"><table class="ptab" id="ptab2a"></table><table class="ptab lg" id="ptab2b" style="margin-top:14px"></table></div>
       <div class="pstep card" id="pstep"></div>
       <div class="pnav">
         <button class="btn ghost" id="p-prev">← Anterior</button>
@@ -749,7 +753,7 @@
 <script>
   /* ============ AUTO-ACTUALIZADOR ============ */
   /* Bump BUILD en cada deploy: las pestañas abiertas detectan la versión nueva y recargan solas. */
-  const BUILD='2026-11-15-3';
+  const BUILD='2026-11-16-1';
   async function checkUpdate(){
     try{
       if(location.protocol==='file:')return;
@@ -980,8 +984,9 @@
    {t:'Verificación 3 · la columna d no se suma',add:[[4,4]],ex:1,
     h:R`<p>En la fila total la columna \( d \) queda en blanco (—): sus valores se compensan, no se suma.</p><p><b>Tabla completa.</b> Con los totales \( \sum f_i|d| = 152 \) y \( \sum f_i d^2 = 1720 \) se calculan después DM, varianza, desvío estándar y CV.</p>`}
   ];
-  let pi=0;
+  let pi=0,pex=1;
   function renderPaso(){
+    if(pex===2){renderPaso2();return;}
     const seen=new Set(),cur=new Set(),ex=new Set(),hl=new Set(),key=(c,r)=>c+'_'+r;
     P_FR.forEach((f,i)=>{if(i>pi)return;(f.add||[]).forEach(([c,r])=>{seen.add(key(c,r));if(i===pi){cur.add(key(c,r));if(f.ex)ex.add(key(c,r));}});if(i===pi)(f.hl||[]).forEach(([c,r])=>hl.add(key(c,r)));});
     const colOn=c=>c===0||[0,1,2,3,4].some(r=>seen.has(key(c,r)));
@@ -1004,7 +1009,7 @@
     document.getElementById('p-next').disabled=pi===P_FR.length-1;
     document.getElementById('pdots').innerHTML=P_FR.map((_,i)=>'<i class="'+(i<=pi?'on':'')+'"></i>').join('');
   }
-  document.getElementById('p-next').addEventListener('click',()=>{if(pi<P_FR.length-1){pi++;renderPaso();}});
+  document.getElementById('p-next').addEventListener('click',()=>{if(pi<(pex===1?P_FR:Q_FR).length-1){pi++;renderPaso();}});
   document.getElementById('p-prev').addEventListener('click',()=>{if(pi>0){pi--;renderPaso();}});
   document.getElementById('p-reset').addEventListener('click',()=>{pi=0;renderPaso();});
   document.addEventListener('keydown',e=>{
@@ -1012,6 +1017,65 @@
     if(e.key==='ArrowRight'){document.getElementById('p-next').click();}
     if(e.key==='ArrowLeft'){document.getElementById('p-prev').click();}
   });
+
+  /* ---- PASO A PASO · r y R² ---- */
+  const Q_DH=['N','ΣX','ΣY','ΣX²','ΣY²','ΣXY'],Q_DV=[4,20,30,120,266,178];
+  const Q_LG=[['N·ΣXY','712'],['ΣX·ΣY','600'],['Numerador','112',1],['N·ΣX² − (ΣX)²','80'],['N·ΣY² − (ΣY)²','164'],['Denominador','114,54',1],['r','0,9778',1],['R²','95,61 %',1]];
+  const Q_FR=[
+   {t:'Los datos y la fórmula de r',add:[],hl:[0,1,2,3,4,5],
+    h:R`<p>De la tabla de la Lección 8 tenés el resumen: \( N = 4 \) pares de datos y las sumatorias. Con ellas se calcula \( r \) en tres bloques: numerador, denominador y división.</p><p>\[ r = \dfrac{N\sum XY - \sum X \sum Y}{\sqrt{\left[N\sum X^2 - (\sum X)^2\right]\left[N\sum Y^2 - (\sum Y)^2\right]}} \]</p>`},
+   {t:'Numerador · primer término',add:[0],hl:[0,5],
+    h:R`<p>Se multiplica \( N \) por la suma de los productos \( \sum XY \).</p><p>\( N \sum XY = 4 \cdot 178 = \mathbf{712} \)</p>`},
+   {t:'Numerador · segundo término',add:[1],hl:[1,2],
+    h:R`<p>Se multiplica la suma de X por la suma de Y: es el <b>producto de las sumas</b>, no la suma de los productos.</p><p>\( \sum X \cdot \sum Y = 20 \cdot 30 = \mathbf{600} \)</p>`},
+   {t:'Numerador · resultado',add:[2],hl:[],
+    h:R`<p>\( 712 - 600 = \mathbf{112} \)</p><p>El signo del numerador es el signo de \( r \): positivo → relación <b>directa</b>.</p>`},
+   {t:'Denominador · factor de X',add:[3],hl:[0,1,3],
+    h:R`<p>\( N \sum X^2 - (\sum X)^2 = 4 \cdot 120 - 20^2 = 480 - 400 = \mathbf{80} \)</p><p>Ojo: \( \sum X^2 \) es la suma de los cuadrados (dato: 120). \( (\sum X)^2 \) es el cuadrado de la suma (\( 20^2 = 400 \)).</p>`},
+   {t:'Denominador · factor de Y',add:[4],hl:[0,2,4],
+    h:R`<p>Igual que con X:</p><p>\( N \sum Y^2 - (\sum Y)^2 = 4 \cdot 266 - 30^2 = 1064 - 900 = \mathbf{164} \)</p>`},
+   {t:'Denominador · producto y raíz',add:[5],hl:[],
+    h:R`<p>Se multiplican los dos factores y se saca la raíz cuadrada:</p><p>\( \sqrt{80 \cdot 164} = \sqrt{13120} \approx \mathbf{114{,}54} \)</p>`},
+   {t:'División · el valor de r',add:[6],hl:[],
+    h:R`<p>\( r = \dfrac{112}{114{,}54} = \mathbf{0{,}9778} \approx 0{,}98 \)</p><p>Se usan 4 decimales como en el modelo; es lo mismo que 0,98 redondeado a 2.</p>`},
+   {t:'Interpretar r',add:[],hl:[],
+    h:R`<p>\( r = 0{,}98 \): relación lineal <b>directa y fuerte</b> (casi perfecta) entre X e Y.</p><p>Directa porque \( r > 0 \) (las dos variables se mueven en el mismo sentido) y fuerte porque está muy cerca de 1.</p>`},
+   {t:'Calcular R²',add:[7],hl:[],
+    h:R`<p>\( R^2 = r^2 \cdot 100 = 0{,}9778^2 \cdot 100 = \mathbf{95{,}61\ \%} \)</p>`},
+   {t:'Ojo con el redondeo de r',add:[],hl:[],
+    h:R`<p>Si primero redondeás \( r \) a 0,98 y después elevás: \( 0{,}98^2 \cdot 100 = 96{,}04\ \% \). Así lo hizo NotebookLM.</p><p>Con \( r \) sin redondear (o con 4 decimales) da <b>95,61 %</b>, el valor más exacto. La diferencia es solo de redondeo: en el modelo de la cátedra el R² sale con \( r \) a 4 decimales.</p>`},
+   {t:'Interpretar R²',add:[],hl:[],
+    h:R`<p>\( R^2 = 95{,}61\ \% \): el <b>95,61 %</b> de la variación de Y está explicada por la variación de X a través de la recta de regresión.</p><p>El 4,39 % restante se debe a otros factores.</p>`},
+   {t:'Verificaciones',add:[],hl:[],
+    h:pli([R`El signo de \( r \) coincide con el del numerador (112 &gt; 0) <span class="ok">✓</span>`,R`\( -1 \le r \le 1 \): 0,9778 está dentro <span class="ok">✓</span>`,R`Los dos factores del denominador (80 y 164) son positivos <span class="ok">✓</span>`])+R`<p>Si algún factor diera negativo, hay un error en las sumatorias.</p>`}
+  ];
+  function renderPaso2(){
+    const f=Q_FR[pi],seen=new Set(),cur=new Set(),hl=new Set(f.hl||[]);
+    Q_FR.forEach((g,i)=>{if(i>pi)return;(g.add||[]).forEach(k=>{seen.add(k);if(i===pi)cur.add(k);});});
+    document.getElementById('ptab2a').innerHTML='<thead><tr>'+Q_DH.map(t=>'<th>'+t+'</th>').join('')+'</tr></thead><tbody><tr>'+Q_DV.map((v,i)=>'<td class="'+(hl.has(i)?'hl':'')+'">'+v+'</td>').join('')+'</tr></tbody>';
+    let b='<thead><tr><th>Cálculo</th><th>Resultado</th></tr></thead><tbody>';
+    Q_LG.forEach((r,i)=>{const on=seen.has(i);b+='<tr'+(r[2]?' class="tot"':'')+'><td class="lbl '+(on?'':'off')+'">'+r[0]+'</td><td class="'+(on?'':'off')+(cur.has(i)?' cur':'')+'">'+r[1]+'</td></tr>';});
+    document.getElementById('ptab2b').innerHTML=b+'</tbody>';
+    const st=document.getElementById('pstep');
+    st.innerHTML='<span class="qgroup">Paso '+(pi+1)+' / '+Q_FR.length+'</span><h3>'+f.t+'</h3>'+f.h;
+    typeset(st);
+    document.getElementById('p-prev').disabled=pi===0;
+    document.getElementById('p-next').disabled=pi===Q_FR.length-1;
+    document.getElementById('pdots').innerHTML=Q_FR.map((_,i)=>'<i class="'+(i<=pi?'on':'')+'"></i>').join('');
+  }
+  function setPex(n){
+    pex=n;pi=0;
+    document.getElementById('pw1').style.display=n===1?'':'none';
+    document.getElementById('pw2').style.display=n===2?'':'none';
+    document.getElementById('p-ex1').className='btn'+(n===1?'':' ghost');
+    document.getElementById('p-ex2').className='btn'+(n===2?'':' ghost');
+    const k=document.getElementById('pkick');
+    k.textContent=n===1?'U4 · Ejercicio 1 del modelo':'U5 · Coeficiente de correlación r y R²';
+    k.style.color=n===1?'var(--u4)':'var(--u5)';
+    renderPaso();
+  }
+  document.getElementById('p-ex1').addEventListener('click',()=>setPex(1));
+  document.getElementById('p-ex2').addEventListener('click',()=>setPex(2));
 
   /* ---- NAVEGACIÓN DE MODOS ---- */
   const views={resumen:document.getElementById('view-resumen'),quiz:document.getElementById('view-quiz'),escribir:document.getElementById('view-escribir'),paso:document.getElementById('view-paso')};
