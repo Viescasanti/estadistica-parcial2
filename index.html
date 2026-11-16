@@ -606,6 +606,13 @@
       <p class="h-main"><span class="dot"></span>1 · Tendencia por mínimos cuadrados</p>
       <p class="def">Se ajusta una recta igual que en U5, pero la X es el <b>tiempo codificado t</b>. Se usan datos <b>anuales</b>.</p>
       <div class="fbox">\[ T_t = a + b \cdot t \]<small>Mismas fórmulas de a y b que en regresión, con t en lugar de X (o la da Excel)</small></div>
+      <p class="h-sub">Cómo se calculan b y a (como en clase)</p>
+      <ul>
+        <li><b>Promedios:</b> \( \bar{t} = \sum t / N \) y \( \bar{y} = \sum y / N \). Con \( t = 1, \dots, 11 \): \( \bar{t} = 66/11 = 6 \).</li>
+        <li><b>Desvíos:</b> \( t - \bar{t} \) y \( y - \bar{y} \). Como el tiempo está ordenado, los desvíos de t dan negativos hasta el período central, cero en el central y positivos después.</li>
+        <li><b>Pendiente:</b> \( b = \dfrac{\sum (t-\bar{t})(y-\bar{y})}{\sum (t-\bar{t})^2} \) &nbsp;·&nbsp; <b>Ordenada:</b> \( a = \bar{y} - b \cdot \bar{t} \). Para la recta no hace falta la columna \( (y-\bar{y})^2 \): eso era para r, que acá no interesa.</li>
+        <li><b>Redondeo:</b> el profesor calculó con el dato real (Excel). Si se trabaja con desvíos aproximados, la suma de desvíos no da exactamente 0 y <b>a</b> puede cambiar en la última cifra. Conviene usar <b>b con 4 decimales</b> para calcular a.</li>
+      </ul>
       <p class="h-sub">La variable tiempo t</p>
       <ul>
         <li><b>Recategorizar:</b> se reemplaza el período (meses, trimestres, años) por números consecutivos. Así una variable de tiempo "cualitativa" (abril, mayo…) pasa a cuantitativa y se puede ajustar la recta. Con años es opcional (evita números grandes), pero en la cátedra se hace.</li>
@@ -619,6 +626,7 @@
         <div class="mini"><b>b · pendiente</b><br>Cuánto <b>aumenta (b &gt; 0) o disminuye (b &lt; 0) en promedio</b> la tendencia de Y <b>por cada período</b> (por año, por trimestre).</div>
       </div>
       <div class="note"><b>Frase modelo:</b> "b = 12,5: según la tendencia, las ventas aumentan en promedio 12,5 millones de pesos por año." · "a = 48: valor de tendencia estimado para 2014 (t = 0, si t = 1 es 2015), 48 millones de pesos."</div>
+      <div class="note"><b>Así lo interpretó en clase</b> (ventas 2000–2010, \( T_t = 0{,}0436 + 0{,}1882t \), en miles de millones): "<b>a</b> = 0,04: en el período 0, o sea 1999 (el año anterior al primero medido), el volumen de ventas <b>teórico</b> fue de 0,04 miles de millones. Es <b>teórico</b> porque no es un dato observado: lo da la recta." · "<b>b</b> = 0,19: a medida que avanza un año, se estima que el volumen de ventas <b>aumenta</b> 0,19 miles de millones; aumenta porque la pendiente es positiva (si fuera negativa, disminuye)."</div>
     </div>
 
     <div class="card">
@@ -636,6 +644,7 @@
       </table>
       </div>
       <div class="note"><b>Frase modelo:</b> "Un relativo de 93,40 indica que ese año las ventas estuvieron un 6,60 % por debajo de lo que indicaba la tendencia; uno de 104,20, un 4,20 % por encima."</div>
+      <div class="note"><b>Cómo lo dijo el profesor:</b> la serie es un <b>producto</b> de sus componentes (tendencia · estacionalidad · ciclos · azar) y <b>para quitar un componente se divide</b>. Primero se calcula la tendencia de cada período (reemplazar cada t en la recta: son los puntos "teóricos") y después se divide el dato por ese valor.</div>
       <ul>
         <li>Los relativos se calculan <b>solo para los años observados</b>. En los años pronosticados no hay Yt, así que no corresponde calcular Rt.</li>
         <li><b>Gráfico de relativos:</b> años en el eje horizontal, Rt en el vertical, línea unida y una <b>referencia horizontal en 100</b> (la tendencia). Arriba de 100 = por encima de la tendencia; abajo = por debajo; sobre la línea = coincide.</li>
@@ -759,7 +768,7 @@
 <script>
   /* ============ AUTO-ACTUALIZADOR ============ */
   /* Bump BUILD en cada deploy: las pestañas abiertas detectan la versión nueva y recargan solas. */
-  const BUILD='2026-11-16-2';
+  const BUILD='2026-11-16-3';
   async function checkUpdate(){
     try{
       if(location.protocol==='file:')return;
@@ -871,6 +880,9 @@
      {q:'¿Con qué método se estima la tendencia?',a:'Con mínimos cuadrados: Tt = a + b·t, usando el tiempo codificado t como variable X.'},
      {q:'¿Cómo se interpreta b en la recta de tendencia?',a:'Lo que aumenta (o disminuye) en promedio la tendencia de Y por cada período (por año).'},
      {q:'¿Cómo se interpreta a en la recta de tendencia?',a:'El valor de tendencia estimado para t = 0; hay que decir a qué año corresponde.'},
+     {q:'¿Por qué el valor de a (o de la tendencia en un año) es "teórico"?',a:'Porque no es un dato observado: lo da la recta de tendencia, no la medición.'},
+     {q:'¿Con qué fórmulas se calculan b y a de la tendencia?',a:'b = Σ(t − t̄)(y − ȳ) / Σ(t − t̄)² y a = ȳ − b·t̄ (o con sumatorias). Para la recta no se necesita Σ(y − ȳ)².'},
+     {q:'¿Cómo se elimina un componente de la serie y cómo se calcula la tendencia de cada período?',a:'La serie es un producto, así que se divide por el componente. La tendencia de cada período se calcula reemplazando su t en la recta.'},
      {q:'Si t = 1 corresponde a 2019, ¿qué año es t = 0?',a:'2018: el año anterior al primero observado.'},
      {q:'Fórmula del relativo cíclico',a:'\\( R_t = \\dfrac{Y_t}{T_t} \\cdot 100 \\)'},
      {q:'¿Qué efecto elimina el relativo Rt?',a:'El de la tendencia: muestra dónde está cada dato respecto de su valor de tendencia.'},
