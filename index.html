@@ -593,7 +593,13 @@
       <p class="def">Conjunto de <b>observaciones tomadas en instantes específicos</b>, generalmente a <b>intervalos iguales</b> (años, trimestres, meses, días, horas).</p>
       <p class="def">Matemáticamente: los valores \( Y_1, Y_2, \dots, Y_n \) de una variable Y (ventas, cotización…) en los tiempos \( t_1, t_2, \dots, t_n \). <b>Y es función de t:</b></p>
       <div class="fbox">\[ Y = F(t) \]<small>En el eje horizontal va el tiempo; en el vertical, los valores de la serie</small></div>
-      <p class="def">Se representa con un <b>gráfico de líneas</b> (gráfico de evolución): los puntos de cada período unidos en orden.</p>
+      <p class="def">El <b>tiempo es la variable independiente</b> (se la llama <b>t</b> en lugar de X): se estudia cómo varía una variable cuantitativa a medida que pasa el tiempo.</p>
+      <p class="def">Se representa con un <b>gráfico de evolución</b>: primero el diagrama de dispersión (los puntos) y después se <b>unen los puntos con segmentos</b>, en orden. Solo los puntos no alcanzan: eso es dispersión, no evolución.</p>
+      <ul>
+        <li><b>Título:</b> qué evoluciona, de qué producto y en qué período. Ej.: "Evolución de las ventas de un producto durante 11 años (2000–2010)".</li>
+        <li><b>El coeficiente r no interesa</b> en series de tiempo: la variable ya está relacionada con el tiempo. Lo que se busca es la tendencia.</li>
+        <li>El profesor nombró los componentes de una serie (<b>T</b>endencia, <b>E</b>stacionalidad, <b>C</b>iclos, <b>A</b>zar), pero en este parcial se trabaja <b>solo la tendencia</b>.</li>
+      </ul>
     </div>
 
     <div class="card">
@@ -602,8 +608,8 @@
       <div class="fbox">\[ T_t = a + b \cdot t \]<small>Mismas fórmulas de a y b que en regresión, con t en lugar de X (o la da Excel)</small></div>
       <p class="h-sub">La variable tiempo t</p>
       <ul>
-        <li>Se reemplazan los años por números naturales consecutivos para calcular más rápido.</li>
-        <li><b>Ojo con desde dónde arranca:</b> el apunte de la cátedra empieza en \( t = 0 \); los ejercicios con Excel suelen empezar en \( t = 1 \). <b>Siempre leerlo del enunciado.</b></li>
+        <li><b>Recategorizar:</b> se reemplaza el período (meses, trimestres, años) por números consecutivos. Así una variable de tiempo "cualitativa" (abril, mayo…) pasa a cuantitativa y se puede ajustar la recta. Con años es opcional (evita números grandes), pero en la cátedra se hace.</li>
+        <li><b>Ojo con desde dónde arranca:</b> en clase el profesor dijo que el <b>período inicial es 1</b>; otras bibliografías y el apunte de la cátedra empiezan en \( t = 0 \). La <b>pendiente es la misma</b>: solo cambia la ordenada al origen a. <b>Siempre leerlo del enunciado.</b></li>
         <li>Si \( t = 1 \) es el primer año, entonces <b>\( t = 0 \) es el año anterior</b> al primero observado.</li>
         <li>Para pronosticar se sigue la numeración: el año siguiente al último observado es el último t + 1.</li>
       </ul>
@@ -753,7 +759,7 @@
 <script>
   /* ============ AUTO-ACTUALIZADOR ============ */
   /* Bump BUILD en cada deploy: las pestañas abiertas detectan la versión nueva y recargan solas. */
-  const BUILD='2026-11-16-1';
+  const BUILD='2026-11-16-2';
   async function checkUpdate(){
     try{
       if(location.protocol==='file:')return;
@@ -856,7 +862,10 @@
    ]},
    {u:'U6 · Serie de tiempo',c:'var(--u6)',items:[
      {q:'¿Qué es una serie de tiempo?',a:'Un conjunto de observaciones tomadas en instantes específicos, generalmente a intervalos iguales. Y = F(t).'},
-     {q:'¿Con qué gráfico se representa una serie de tiempo?',a:'Con un gráfico de líneas (de evolución): tiempo en el eje horizontal, valores en el vertical.'}
+     {q:'¿Con qué gráfico se representa una serie de tiempo?',a:'Con un gráfico de evolución: el diagrama de dispersión con los puntos unidos por segmentos; tiempo en el eje horizontal, valores en el vertical.'},
+     {q:'¿Cuál es la variable independiente en una serie de tiempo? ¿Interesa el coeficiente r?',a:'El tiempo (t). No interesa r, porque la variable ya está relacionada con el tiempo; lo que se busca es la tendencia.'},
+     {q:'¿Para qué se recategoriza el tiempo? ¿Qué cambia si el período inicial es 0 en vez de 1?',a:'Para pasar el tiempo a números consecutivos (cuantitativa) y ajustar la recta. La pendiente es la misma; solo cambia la ordenada al origen a.'},
+     {q:'¿En qué consiste la tarea en una serie de tiempo?',a:'Analizar la tendencia (aumento o disminución, según el signo de b), hallar la recta de tendencia por mínimos cuadrados y pronosticar con ella.'}
    ]},
    {u:'U6 · Tendencia, relativos y pronóstico',c:'var(--u6)',items:[
      {q:'¿Con qué método se estima la tendencia?',a:'Con mínimos cuadrados: Tt = a + b·t, usando el tiempo codificado t como variable X.'},
