@@ -645,6 +645,7 @@
       </div>
       <div class="note"><b>Frase modelo:</b> "Un relativo de 93,40 indica que ese año las ventas estuvieron un 6,60 % por debajo de lo que indicaba la tendencia; uno de 104,20, un 4,20 % por encima."</div>
       <div class="note"><b>Cómo lo dijo el profesor:</b> la serie es un <b>producto</b> de sus componentes (tendencia · estacionalidad · ciclos · azar) y <b>para quitar un componente se divide</b>. Primero se calcula la tendencia de cada período (reemplazar cada t en la recta: son los puntos "teóricos") y después se divide el dato por ese valor.</div>
+      <div class="note"><b>Las dos columnas de la planilla de clase:</b> <b>Tendencia</b> (\( T_t = a + b \cdot t \)) y <b>Yt / Tt · 100</b>. Esa segunda columna es el <b>relativo</b> (en la planilla de la clase aparece rotulada "estacionalidad", pero la cuenta es la del relativo: en el parcial se pide como relativo). Con los datos de clase, redondeando como el profesor (0,19 y 0,04) da 86,96 · 95,24 · 81,97 · 112,50 · 111,11 · 127,12 · 94,89 · 70,51 · 97,14 · 97,94 · 107,98; con b y a de 4 decimales los valores cambian en las décimas (86,27 · 95,24 · 82,21 · …). Usá la precisión que pida el enunciado.</div>
       <ul>
         <li>Los relativos se calculan <b>solo para los años observados</b>. En los años pronosticados no hay Yt, así que no corresponde calcular Rt.</li>
         <li><b>Gráfico de relativos:</b> años en el eje horizontal, Rt en el vertical, línea unida y una <b>referencia horizontal en 100</b> (la tendencia). Arriba de 100 = por encima de la tendencia; abajo = por debajo; sobre la línea = coincide.</li>
@@ -768,7 +769,7 @@
 <script>
   /* ============ AUTO-ACTUALIZADOR ============ */
   /* Bump BUILD en cada deploy: las pestañas abiertas detectan la versión nueva y recargan solas. */
-  const BUILD='2026-11-16-3';
+  const BUILD='2026-11-16-4';
   async function checkUpdate(){
     try{
       if(location.protocol==='file:')return;
