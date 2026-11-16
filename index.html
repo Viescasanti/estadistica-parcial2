@@ -719,6 +719,9 @@
     <p class="h-sub" style="color:var(--u6);text-decoration-color:var(--u6)">U6 · Series de tiempo</p>
     <div class="fgrid">
       <div class="fcard"><span class="lbl">Tendencia</span><div class="f">\[ T_t = a + b \cdot t \]</div><div class="d">b = cambio por período · a = valor en t = 0.</div></div>
+      <div class="fcard"><span class="lbl">Promedios de la serie</span><div class="f">\[ \bar{t} = \frac{\sum t}{N} \qquad \bar{y} = \frac{\sum y}{N} \]</div><div class="d">El tiempo se recategoriza: el período inicial es t = 1.</div></div>
+      <div class="fcard"><span class="lbl">Pendiente b (por desvíos)</span><div class="f">\[ b = \frac{\sum (t-\bar{t})(y-\bar{y})}{\sum (t-\bar{t})^2} \]</div><div class="d">Cuánto aumenta (b &gt; 0) o disminuye (b &lt; 0) en promedio Y por período. No se necesita \( \sum (y-\bar{y})^2 \) (eso es para r).</div></div>
+      <div class="fcard"><span class="lbl">Ordenada a</span><div class="f">\[ a = \bar{y} - b \cdot \bar{t} \]</div><div class="d">Valor <b>teórico</b> de la tendencia en t = 0 (el año anterior al primero). Usar b con 4 decimales para no arrastrar redondeo.</div></div>
       <div class="fcard"><span class="lbl">Relativo cíclico</span><div class="f">\[ R_t = \frac{Y_t}{T_t} \cdot 100 \]</div><div class="d">Elimina la tendencia · &gt; 100 arriba, &lt; 100 abajo.</div></div>
       <div class="fcard"><span class="lbl">Pronóstico</span><div class="f">\[ \hat{Y} = T_t = a + b \cdot t_{futuro} \]</div><div class="d">t = siguiente al último observado.</div></div>
     </div>
@@ -769,7 +772,7 @@
 <script>
   /* ============ AUTO-ACTUALIZADOR ============ */
   /* Bump BUILD en cada deploy: las pestañas abiertas detectan la versión nueva y recargan solas. */
-  const BUILD='2026-11-16-4';
+  const BUILD='2026-11-16-5';
   async function checkUpdate(){
     try{
       if(location.protocol==='file:')return;
